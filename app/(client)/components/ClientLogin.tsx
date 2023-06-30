@@ -3,8 +3,6 @@
 import { FC, useEffect } from "react";
 
 import { useUser } from "@/context/SessionContext";
-import { account } from "@/lib/appwrite-config";
-import toast from "react-hot-toast";
 
 
 const ClientLogin: FC = () => {

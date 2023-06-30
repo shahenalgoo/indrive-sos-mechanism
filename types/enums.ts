@@ -3,3 +3,8 @@ export enum Severity {
     moderate = "Moderate",
     critical = "Critical"
 }
+
+export enum ThirdPartyHelp {
+    police = "911",
+    contacts = "Trusted Contacts"
+}

@@ -15,6 +15,11 @@ import { setGlobalState, useGlobalState } from "@/lib/global-states";
 // Icns
 import { TbCircle, TbCircleCheck, TbCircleCheckFilled, TbX } from 'react-icons/tb';
 import { Severity } from "@/types/enums";
+import { AppwriteIds, databases } from "@/lib/appwrite-config";
+import { ID } from "appwrite";
+import { SosReq } from "@/types/typings";
+import { useUser } from "@/context/SessionContext";
+import { useSosReq } from "@/context/SosReqContext";
 
 
 /**
@@ -66,6 +71,48 @@ const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
     const [sosInitiated] = useGlobalState('sosInitiated');
     const [sosSeverity] = useGlobalState('sosSeverity');
 
+    // Hooks
+    const { user } = useUser();
+    const { sosReq, setSosReq } = useSosReq();
+
+
+
+    // Create SOS Request
+    const handleSOSReq = async () => {
+        if (sosReq) {
+            console.log("SOS REQ ALREADY ACTIVE");
+            setGlobalState('sosInitiated', true) // as safety
+            return;
+        }
+
+        try {
+            const res = await databases.createDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, ID.unique(), {
+                severity: sosSeverity.toLowerCase(),
+                is_active: true,
+                initiator: user?.$id,
+                can_speak: true,
+                req_acknowledged: false,
+                agent_informed_police: false,
+                initiator_informed_police: false,
+                initiator_informed_contacts: false
+            } as SosReq);
+
+            console.log("Req created successfully,", res);
+            setGlobalState('sosInitiated', true)
+            // setSosReq(res as SosReq);
+
+        } catch (error) {
+            console.log("Could not create SOS Request");
+            console.log(error);
+
+        }
+
+
+    }
+
+
+
+
     return (
         <div {...props} className={cn(` absolute bottom-0 left-0 w-full h-auto bg-white text-black py-8 px-6 rounded-tl-3xl rounded-tr-3xl ${className}`)}>
 
@@ -95,7 +142,7 @@ const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
                     Cancel
                 </Button>
 
-                <Button onClick={() => setGlobalState('sosInitiated', !sosInitiated)} variant='accent' size='lg' className="flex-1">
+                <Button onClick={() => handleSOSReq()} variant='accent' size='lg' className="flex-1">
                     Send SOS
                 </Button>
             </div>
