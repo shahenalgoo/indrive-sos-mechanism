@@ -1,4 +1,5 @@
 import Panel from "@/components/Panel";
+import Box from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { setGlobalState, useGlobalState } from "@/lib/global-states";
@@ -6,53 +7,21 @@ import { FC } from "react";
 import { TbX } from "react-icons/tb";
 
 
-/**
- * HEADER
- * 
- */
-interface HeaderProps {
-
-}
-
-const Header: FC<HeaderProps> = () => {
-
-    // States
-    //
-    const [sosModal] = useGlobalState('sosModal');
-
-    return (
-        <div className="flex justify-between items-center py-2 pl-4 pr-2">
-            <h1 className="font-bold">InDrive SOS</h1>
-            <Button onClick={() => setGlobalState('sosModal', !sosModal)} size='icon' className="rounded-full">
-                <TbX />
-            </Button>
-        </div>
-    );
-}
-
-
 
 /**
- * CHAT MESSAGES
+ * SOS Procedure
  * 
  */
-interface ChatMessagesProps {
+interface SosProcedureProps { }
 
-}
+const SosProcedure: FC<SosProcedureProps> = () => {
 
-const ChatMessages: FC<ChatMessagesProps> = () => {
     return (
-        <div>
-            <ScrollArea className="h-[200px] w-full rounded-md border-t border-b p-4">
-                Jokester began sneaking into the castle in the middle of the night and leaving
-                jokes all over the place: under the king's pillow, in his soup, even in the
-                royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
-                then, one day, the people of the kingdom discovered that the jokes left by
-                Jokester were so funny that they couldn't help but laugh. And once they
-                started laughing, they couldn't stop.
-            </ScrollArea>
-        </div>
-    );
+        <Box>
+            <h6 className="mb-1 text-sm text-secondary uppercase font-bold">SOS Procedure started</h6>
+            <p className="text-sm text-neutral-400">All the necessary information about your ride has been sent in emergency to inDrive.</p>
+        </Box>
+    )
 }
 
 
@@ -63,12 +32,31 @@ const ChatMessages: FC<ChatMessagesProps> = () => {
 const CriticalPanel: FC = () => {
 
     return (
-        <Panel className="h-full p-0">
+        <div className="flex flex-col place-content-end h-[calc(100vh_-_50px)]">
+            <div className="flex-1 min-h-0 p-4 pr-0">
+                <ScrollArea className="h-full w-full">
+                    <div className="flex flex-col gap-2 pr-4">
 
-            <Header />
-            <ChatMessages />
+                        <SosProcedure />
+                        {/* 
+                        <Box>
+                            <h6 className="mb-1 text-sm text-secondary uppercase font-bold">SOS Procedure started</h6>
+                            <p className="text-sm text-neutral-400">All the necessary information about your ride has been sent in emergency to inDrive.</p>
+                        </Box> */}
 
-        </Panel>
+                    </div>
+                </ScrollArea>
+            </div>
+
+            <Panel className="shrink-0">
+
+                test
+                {/* <Button onClick={() => setGlobalState('sosModal', false)}>
+                    close
+                </Button> */}
+
+            </Panel>
+        </div>
     );
 }
 

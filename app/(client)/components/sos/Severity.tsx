@@ -83,7 +83,7 @@ const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
                 <SeverityOptions
                     severity={Severity.critical}
                     color="bg-critical"
-                    title="Critical Emergency"
+                    title="Critical - SOS"
                 >
                     We will call emergency on your behalf and do our best to assist you.
                 </SeverityOptions>

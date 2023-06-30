@@ -21,7 +21,7 @@ const SOSModal: FC<SOSModalProps> = ({ className, ...props }) => {
     const [sosInitiated] = useGlobalState('sosInitiated');
 
     return sosModal ? (
-        <div {...props} className={cn(`absolute top-0 left-0 w-full h-full backdrop-blur-lg bg-black/80 z-50 text-white ${className}`)}>
+        <div {...props} className={cn(`absolute top-0 left-0 w-full h-full backdrop-blur-lg bg-black/90 z-50 text-white ${className}`)}>
 
             {/* <Navbar /> */}
 
