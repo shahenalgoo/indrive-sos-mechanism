@@ -1,8 +1,8 @@
-import Panel from "@/components/Panel";
+import Panel from "@/components/ui/panel";
 import Box from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useSosReq } from "@/context/SosReqContext";
+import { useSosReq } from "@/context/ClientSosContext";
 import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { setGlobalState, useGlobalState } from "@/lib/global-states";
 import { cn } from "@/lib/override-classes";
