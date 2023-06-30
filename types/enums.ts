@@ -8,3 +8,8 @@ export enum ThirdPartyHelp {
     police = "911",
     contacts = "Trusted Contacts"
 }
+
+export enum Role {
+    client = "client",
+    agent = "agent"
+}
