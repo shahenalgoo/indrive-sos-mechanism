@@ -43,6 +43,7 @@ const CriticalPanel: FC = () => {
             console.log("SOS REQUEST NOT FOUND");
             return;
         }
+
         try {
 
             const res = await databases.updateDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, sosReq.$id, { can_speak: !sosReq.can_speak } as SosReq)
