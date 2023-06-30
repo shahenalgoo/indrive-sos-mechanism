@@ -61,9 +61,9 @@ const SeverityOptions: FC<SeverityOptions> = ({ severity, title, color, children
  * MAIN
  * 
  */
-interface SeverityPanelProps extends HTMLAttributes<HTMLDivElement> { }
+interface SeveritySelectorProps extends HTMLAttributes<HTMLDivElement> { }
 
-const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
+const SeveritySelector: FC<SeveritySelectorProps> = ({ className, ...props }) => {
 
     // States
     //
@@ -106,12 +106,7 @@ const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
             console.log(error);
 
         }
-
-
     }
-
-
-
 
     return (
         <div {...props} className={cn(` absolute bottom-0 left-0 w-full h-auto bg-white text-black py-8 px-6 rounded-tl-3xl rounded-tr-3xl ${className}`)}>
@@ -151,4 +146,4 @@ const SeverityPanel: FC<SeverityPanelProps> = ({ className, ...props }) => {
     )
 }
 
-export default SeverityPanel;
+export default SeveritySelector;

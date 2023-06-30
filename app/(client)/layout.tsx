@@ -1,6 +1,7 @@
 import '../globals.scss';
-import SOSModal from './components/sos-modal';
+
 import ClientProviders from '@/components/ClientProviders';
+import SosModal from './components/SosModal';
 
 export const metadata = {
 	title: 'InDrive SOS'
@@ -18,7 +19,7 @@ export default function RootLayout({
 					<div className='relative w-full max-w-[360px] h-[calc(100vh_-_50px)] max-h-[740px] bg-white rounded-3xl overflow-hidden'>
 
 						{children}
-						<SOSModal />
+						<SosModal />
 
 					</div>
 				</body>
