@@ -19,7 +19,7 @@ import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { ID } from "appwrite";
 import { SosReq } from "@/types/typings";
 import { useUser } from "@/context/SessionContext";
-import { useSosReq } from "@/context/SosReqContext";
+import { useSosReq } from "@/context/ClientSosContext";
 
 
 /**

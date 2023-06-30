@@ -6,7 +6,7 @@ import { FC } from "react";
 import { messages } from "@/data/messages";
 import Box from "@/components/ui/box";
 import { TbChecks, TbCircle, TbCircleCheck, TbCircleCheckFilled, TbCircleX, TbLoader, TbLoader2 } from "react-icons/tb";
-import { useSosReq } from "@/context/SosReqContext";
+import { useSosReq } from "@/context/ClientSosContext";
 import { Button } from "@/components/ui/button";
 import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { SosReq } from "@/types/typings";

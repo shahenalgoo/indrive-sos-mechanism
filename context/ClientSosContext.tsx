@@ -19,7 +19,7 @@ import { Role } from "@/types/enums";
 
 // SosReq typings
 //
-type SosReqContextType = {
+type ClientSosContextType = {
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     sosReq: SosReq | null;
@@ -28,23 +28,23 @@ type SosReqContextType = {
     sendMessage: (userId: string, message: string) => Promise<void>
 };
 
-type SosReqProviderProps = {
+type ClientSosProviderProps = {
     children: React.ReactNode;
 };
 
 
 // Create new context
 //
-const SosReqContext = createContext<SosReqContextType | null>(null);
+const ClientSosContext = createContext<ClientSosContextType | null>(null);
 
 
 // Hook to access context
 //
-export const useSosReq = (): SosReqContextType => {
-    const context = useContext(SosReqContext);
+export const useSosReq = (): ClientSosContextType => {
+    const context = useContext(ClientSosContext);
 
     if (!context) {
-        throw new Error('Hook must be used within SosReqProvider context');
+        throw new Error('Hook must be used within ClientSosProvider context');
     }
 
     return context;
@@ -56,7 +56,7 @@ export const useSosReq = (): SosReqContextType => {
  * Wrap application to provide context
  * 
  */
-export const SosReqProvider: React.FC<SosReqProviderProps> = ({ children }: any) => {
+export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }: any) => {
 
     // States
     //
@@ -191,7 +191,7 @@ export const SosReqProvider: React.FC<SosReqProviderProps> = ({ children }: any)
 
     // Variables made available from context
     //
-    const contextValue: SosReqContextType = {
+    const contextValue: ClientSosContextType = {
         isLoading,
         setIsLoading,
         sosReq,
@@ -202,8 +202,8 @@ export const SosReqProvider: React.FC<SosReqProviderProps> = ({ children }: any)
 
 
     return (
-        <SosReqContext.Provider value={contextValue}>
+        <ClientSosContext.Provider value={contextValue}>
             {children}
-        </SosReqContext.Provider>
+        </ClientSosContext.Provider>
     )
 }
