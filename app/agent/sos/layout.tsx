@@ -1,7 +1,7 @@
 import '../../globals.scss';
 
 // Components
-import Providers from '@/components/Providers';
+import AgentProviders from '@/components/AgentProviders';
 import CheckUser from '../components/CheckUser';
 import NavbarAgent from '../components/Navbar';
 import LeftSidebar from '../components/LeftSidebar';
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<Providers>
+			<AgentProviders>
 				<CheckUser>
 					<body className='h-[calc(100vh_-_56px)] overflow-hidden'>
 						<NavbarAgent />
@@ -28,7 +28,7 @@ export default function RootLayout({
 						</main>
 					</body>
 				</CheckUser>
-			</Providers>
+			</AgentProviders>
 		</html>
 	)
 }
