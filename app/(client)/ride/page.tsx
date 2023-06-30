@@ -1,7 +1,7 @@
 import Image from 'next/image';
 // Components
 
-import Navbar from "@/app/(client)/components/sos/Navbar";
+import Navbar from "@/app/(client)/components/sos-modal/Navbar";
 import RideTriggers from '../components/RideTriggers';
 
 

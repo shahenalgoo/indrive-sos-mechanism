@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import { SessionProvider as SessionContextProvider } from '@/context/SessionContext';
+import { SosReqProvider as SosReqContextProvider } from '@/context/SosReqContext';
 
 
 interface ProvidersProps {
@@ -11,7 +12,9 @@ interface ProvidersProps {
 const Providers: FC<ProvidersProps> = ({ children }) => {
     return (
         <SessionContextProvider>
-            {children}
+            <SosReqContextProvider>
+                {children}
+            </SosReqContextProvider>
         </SessionContextProvider>
     );
 }

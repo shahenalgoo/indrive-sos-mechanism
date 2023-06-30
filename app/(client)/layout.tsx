@@ -1,6 +1,6 @@
 import '../globals.scss';
 import Providers from '@/components/Providers';
-import SOSModal from './components/sos';
+import SOSModal from './components/sos-modal';
 
 export const metadata = {
 	title: 'InDrive SOS'
