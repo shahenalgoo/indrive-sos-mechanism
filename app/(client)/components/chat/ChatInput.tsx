@@ -1,33 +1,45 @@
+import { useClientSos } from "@/context/ClientSosContext";
+import { useUser } from "@/context/SessionContext";
 import { FC, useRef, useState } from "react";
 
 import TextareaAutosize from 'react-textarea-autosize';
 
-interface ChatInputProps {
 
-}
+const ChatInput: FC = () => {
 
-const ChatInput: FC<ChatInputProps> = () => {
-
-    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    // States
+    //
     const [input, setInput] = useState<string>('');
+
+    // Ref
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+    // Hooks
+    //
+    const { sendMessage } = useClientSos();
+    const { user } = useUser();
+
+    // No user 😵
+    if (!user) {
+        console.log('No user found');
+        return
+    }
+
+
+    const onSubmit = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage(user?.$id, input);
+            setInput('');
+        }
+    }
+
 
     return (
         <div className="absolute bottom-0 left-0 z-50 w-full p-4 bg-neutral-900">
             <TextareaAutosize
                 ref={textareaRef}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault()
-
-                        // const message: Message = {
-                        //     id: nanoid(),
-                        //     isUserMessage: true,
-                        //     text: input,
-                        // }
-
-                        // sendMessage(message)
-                    }
-                }}
+                onKeyDown={onSubmit}
                 rows={2}
                 maxRows={2}
                 autoFocus
