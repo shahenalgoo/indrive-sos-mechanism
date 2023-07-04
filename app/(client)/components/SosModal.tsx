@@ -6,7 +6,6 @@ import { FC, HTMLAttributes } from "react";
 // Lib
 import { cn } from "@/lib/override-classes";
 import { useGlobalState } from "@/lib/global-states";
-import Navbar from "./sos-modal/Navbar";
 import SeveritySelector from "./SeveritySelector";
 import CriticalPanel from "./sos-modal/Critical";
 

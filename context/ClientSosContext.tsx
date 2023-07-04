@@ -40,7 +40,7 @@ const ClientSosContext = createContext<ClientSosContextType | null>(null);
 
 // Hook to access context
 //
-export const useSosReq = (): ClientSosContextType => {
+export const useClientSos = (): ClientSosContextType => {
     const context = useContext(ClientSosContext);
 
     if (!context) {

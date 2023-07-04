@@ -19,7 +19,7 @@ import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { ID } from "appwrite";
 import { SosReq } from "@/types/typings";
 import { useUser } from "@/context/SessionContext";
-import { useSosReq } from "@/context/ClientSosContext";
+import { useClientSos } from "@/context/ClientSosContext";
 
 
 /**
@@ -73,7 +73,7 @@ const SeveritySelector: FC<SeveritySelectorProps> = ({ className, ...props }) =>
 
     // Hooks
     const { user } = useUser();
-    const { sosReq, setSosReq } = useSosReq();
+    const { sosReq, setSosReq } = useClientSos();
 
 
 

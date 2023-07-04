@@ -1,15 +1,15 @@
 'use client';
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 
-import { messages } from "@/data/messages";
 import Box from "@/components/ui/box";
-import { TbChecks, TbCircle, TbCircleCheck, TbCircleCheckFilled, TbCircleX, TbLoader, TbLoader2 } from "react-icons/tb";
-import { useSosReq } from "@/context/ClientSosContext";
+import { TbChecks, TbCircleCheck, TbCircleX, TbLoader2 } from "react-icons/tb";
+import { useClientSos } from "@/context/ClientSosContext";
 import { Button } from "@/components/ui/button";
 import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { SosReq } from "@/types/typings";
+import { cn } from "@/lib/override-classes";
 
 
 /**
@@ -33,7 +33,9 @@ const SosProcedureStarted: FC = () => {
  */
 const SosAcknowledgement: FC = () => {
 
-    const { sosReq } = useSosReq();
+    // Hooks
+    //
+    const { sosReq } = useClientSos();
 
     return (
         <Box space='sm'>
@@ -62,7 +64,9 @@ const SosAcknowledgement: FC = () => {
  */
 const SosCallback: FC = () => {
 
-    const { sosReq } = useSosReq();
+    // Hooks
+    //
+    const { sosReq } = useClientSos();
 
     const handleCannotSpeak = async () => {
         if (!sosReq) {
@@ -101,12 +105,63 @@ const SosCallback: FC = () => {
 
 
 /**
+ * CHAT MESSAGES
+ * 
+ */
+const AllMessages: FC = () => {
+
+    // Hooks
+    //
+    const { allMessages } = useClientSos();
+    const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
+
+    // Auto Scroll to bottom
+    //
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest', inline: 'start' })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [allMessages]);
+
+    return (
+        <div className="mt-4 flex gap-3 flex-col-reverse">
+            <div ref={messagesEndRef} />
+
+            {allMessages?.map((message) => (
+                <div key={message.$id} id={message.$id} className="message">
+                    <div className={cn('flex items-end', {
+                        'justify-end': message.role === 'client'
+                    })}>
+
+                        <div className={cn('flex flex-col space-y-2 text-sm max-w-[16rem] overflow-x-hidden', {
+                            'order-1 items-end': message.role === 'client',
+                            'order-2 items-start': message.role !== 'client',
+                        })}>
+                            <p className={cn(`px-4 py-2 rounded-xl whitespace-pre-line`, {
+                                'bg-neutral-800 text-white text-sm': message.role === 'client',
+                                'bg-lime-900 text-white text-md': message.role !== 'client',
+                            })}>
+                                {message.message}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+
+
+/**
  * MAIN EXPORT
  * 
  */
 const ChatMessages: FC = () => {
-
-    const inverseMessages = [...messages].reverse()
 
     return (
         <div className="relative z-40 w-full h-full pt-12 pb-20 pr-0">
@@ -116,39 +171,7 @@ const ChatMessages: FC = () => {
                     <SosProcedureStarted />
                     <SosAcknowledgement />
                     <SosCallback />
-
-                    {/* Chat Messages */}
-                    <div className="flex flex-col-reverse">
-                        {inverseMessages.map((message, i) => (
-                            <div key={i}>
-                                {message.message}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* 
-                    <p>start --- message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message</p>
-                    <p>message --- end</p> */}
+                    <AllMessages />
 
                 </div>
             </ScrollArea>
