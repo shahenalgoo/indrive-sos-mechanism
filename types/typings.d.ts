@@ -1,5 +1,5 @@
 import { Models } from "appwrite"
-import { Role, Severity } from "./enums";
+import { Role, Severity, Mood } from "./enums";
 export type SosReq = Models.Document & {
     severity: Severity;
     initiator: string;
@@ -16,4 +16,11 @@ export type SosMessage = Models.Document & {
     sender: string;
     role: Role;
     message: string;
+}
+
+export type MoodsPrefs = {
+    mood: Mood,
+    min_talk: boolean,
+    no_music: boolean,
+    no_smoking: boolean,
 }
