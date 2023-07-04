@@ -6,36 +6,42 @@
 // React
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 
+// Tyings
+import { SosReq } from "@/types/typings";
+
 // Appwrite
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
 import { Query } from "appwrite";
-import { SosReq } from "@/types/typings";
+
+// Lib
 import { setGlobalState } from "@/lib/global-states";
 
 
 // SosReq typings
 //
-type SosRequestsContextType = {
+type AgentSosContextType = {
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    sosReqs: SosReq[] | null;
-    setSosReqs: React.Dispatch<React.SetStateAction<SosReq[] | null>>
+    allRequests: SosReq[] | null;
+    updateSos: (sosRequest: SosReq | null, data: any) => Promise<void>
+
+    // setAllReqests: React.Dispatch<React.SetStateAction<SosReq[] | null>>
 };
 
-type SosRequestsProviderProps = {
+type AgentSosProviderProps = {
     children: React.ReactNode;
 };
 
 
 // Create new context
 //
-const SosReqContext = createContext<SosRequestsContextType | null>(null);
+const AgentSosContext = createContext<AgentSosContextType | null>(null);
 
 
 // Hook to access context
 //
-export const useSosRequests = (): SosRequestsContextType => {
-    const context = useContext(SosReqContext);
+export const useAgentSos = (): AgentSosContextType => {
+    const context = useContext(AgentSosContext);
 
     if (!context) {
         throw new Error('Hook must be used within SosReqProvider context');
@@ -45,70 +51,109 @@ export const useSosRequests = (): SosRequestsContextType => {
 };
 
 
-/**
- * Sos Requests Provider
- * Wrap application to provide context
- * 
- */
-export const SosRequestsProvider: React.FC<SosRequestsProviderProps> = ({ children }: any) => {
+// Sos Requests Provider
+//
+export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: any) => {
 
     // States
     //
-    const [sosReqs, setSosReqs] = useState<SosReq[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [allRequests, setAllReqests] = useState<SosReq[] | null>(null);
 
-    // Fetch SOS Requests
-    //
-    const fetchSosRequests = useCallback(async () => {
 
+
+
+
+    /**
+     * FETCH ALL SOS REQUESTS
+     * 
+     */
+    const fetchAllRequests = useCallback(async () => {
         setIsLoading(true);
 
         try {
-
             const res = await databases.listDocuments(AppwriteIds.databaseId, AppwriteIds.sosReqId,
                 [
                     Query.equal("is_active", true),
                     Query.orderDesc("$createdAt")
                 ]
-            );
+            )
 
             if (res.total > 0) {
-
-                setSosReqs(res.documents as SosReq[]);
+                setAllReqests(res.documents as SosReq[]);
                 setGlobalState('sosInitiated', true)
-
             } else {
-                console.log("No Sos Req found");
+                // console.log("No SOS request found.");
                 setGlobalState('sosInitiated', false)
-                setSosReqs(null);
+                setAllReqests(null);
             }
-
-
         } catch (error) {
-
             console.log(error);
-
         } finally {
             setIsLoading(false);
         }
-
     }, []);
 
 
-    // Use effect to find sos initially
+    // UPDATE SOS
     //
+    const updateSos = async (sosRequest: SosReq | null, data: any) => {
+        if (!sosRequest) {
+            console.log("SOS REQUEST NOT FOUND");
+            return;
+        }
+
+        try {
+            await databases.updateDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, sosRequest.$id, data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    // Use effect to find sos initially
     useEffect(() => {
-        fetchSosRequests();
-    }, [fetchSosRequests]);
+        fetchAllRequests();
+    }, [fetchAllRequests]);
 
 
 
 
-    // Use effect to subscribe to changes
+    /**
+     * FETCH SINGLE REQUEST
+     * 
+     */
+    // const fetchSingleRequest = useCallback(async (id: string) => {
+    //     setIsLoading(true);
+    //     try {
+    //         const res = await databases.getDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, id);
+    //         setSingleRequest(res as SosReq);
+    //         console.log(singleRequest);
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // }, []);
+
+
+
+
+
+
+
+
+
+
+
+    // Subscribe to changes
     useEffect(() => {
+        fetchAllRequests();
+
+        // Sub to all documents
         const subscribe = client.subscribe(`databases.${AppwriteIds.databaseId}.collections.${AppwriteIds.sosReqId}.documents`, res => {
-            // Getting ref to event note
-            fetchSosRequests();
+            fetchAllRequests();
         });
 
         return () => {
@@ -118,19 +163,22 @@ export const SosRequestsProvider: React.FC<SosRequestsProviderProps> = ({ childr
     }, []);
 
 
+
+
+
     // Variables made available from context
     //
-    const contextValue: SosRequestsContextType = {
+    const contextValue: AgentSosContextType = {
         isLoading,
         setIsLoading,
-        sosReqs,
-        setSosReqs
-    };
-
+        allRequests,
+        updateSos
+        // setAllReqests
+    }
 
     return (
-        <SosReqContext.Provider value={contextValue}>
+        <AgentSosContext.Provider value={contextValue}>
             {children}
-        </SosReqContext.Provider>
+        </AgentSosContext.Provider>
     )
-}
+};

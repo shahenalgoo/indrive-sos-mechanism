@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { SessionProvider as SessionContextProvider } from '@/context/SessionContext';
-import { SosRequestsProvider as SosRequestsContextProvider } from "@/context/AgentSosContext";
+import { AgentSosProvider } from "@/context/AgentSosContext";
 
 interface ProvidersProps {
     children: React.ReactNode;
@@ -11,9 +11,9 @@ interface ProvidersProps {
 const AgentProviders: FC<ProvidersProps> = ({ children }) => {
     return (
         <SessionContextProvider>
-            <SosRequestsContextProvider>
+            <AgentSosProvider>
                 {children}
-            </SosRequestsContextProvider>
+            </AgentSosProvider>
         </SessionContextProvider>
     );
 }
