@@ -1,18 +1,19 @@
 import Image from 'next/image';
 // Components
 
-import Navbar from "@/app/(client)/components/sos-modal/Navbar";
 import RideTriggers from '../components/RideTriggers';
+import MoodsPrefs from '../components/moods/MoodsPrefs';
 
 
 export default function Home() {
 	return (
 		<>
+			<MoodsPrefs />
+
 			{/* Content */}
 			<div className='relative z-30'>
 
 				<RideTriggers />
-
 			</div>
 
 			{/* MAP DEMO */}
