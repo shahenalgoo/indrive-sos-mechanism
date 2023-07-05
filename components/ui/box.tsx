@@ -11,7 +11,7 @@ const boxVariants = cva(
         variants: {
             variant: {
                 solid: 'bg-neutral-950 text-white',
-                border: 'border border-border-light dark:border-border-dark',
+                border: 'border border-border',
                 white: 'bg-white dark:bg-neutral-900'
             },
             rounded: {
@@ -20,7 +20,8 @@ const boxVariants = cva(
             },
             space: {
                 default: 'p-4',
-                sm: 'p-2'
+                sm: 'p-2',
+                none: 'p-0'
             }
         },
         defaultVariants: {
