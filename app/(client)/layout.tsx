@@ -2,6 +2,7 @@ import '../globals.scss';
 
 import ClientProviders from '@/components/ClientProviders';
 import SosModal from './components/sos/SosModal';
+import Toaster from '@/components/misc/Toaster';
 
 export const metadata = {
 	title: 'InDrive SOS'
@@ -20,6 +21,7 @@ export default function RootLayout({
 
 						{children}
 						<SosModal />
+						<Toaster />
 
 					</div>
 				</body>

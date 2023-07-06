@@ -6,6 +6,7 @@ import MoodsPrefs from '../components/moods/MoodsPrefs';
 import { TbChevronUp, TbCircleCheckFilled, TbLoader, TbLoader2, TbMessage, TbPhone, TbStarFilled } from 'react-icons/tb';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from '@/components/ui/button';
+import Logout from '../components/Logout';
 
 
 
@@ -14,11 +15,12 @@ export default function Home() {
 		<>
 			<MoodsPrefs />
 
-			{/* Content */}
-			<div className='relative z-30 p-6'>
-
+			{/* Header */}
+			<div className='absolute top-0 left-0 z-30 w-full px-4 py-2 bg-white border-b-2 border-border'>
+				<Logout />
 			</div>
 
+			{/* Ride Details */}
 			<div className='absolute bottom-0 left-0 z-30 w-full'>
 				<div className='flex justify-center gap-2 p-4'>
 					<RideTriggers />
@@ -27,7 +29,7 @@ export default function Home() {
 				<div className='flex items-center justify-center gap-4 px-4 py-3 bg-white border-t-2 border-border'>
 					<div className='text-center'>
 						<h4 className='text-sm font-semibold mb-1 ml-1'>
-							Ford Fiesta (White)
+							Ford Fiesta
 						</h4>
 						<span className='inline-block border border-neutral-300 rounded-lg px-4 font-bold bg-white'>
 							FRD 3568
