@@ -2,19 +2,20 @@
 
 // React
 import { FC, HTMLAttributes } from "react";
+import Image from "next/image";
 
 // Lib
 import { cn } from "@/lib/override-classes";
 import { setGlobalState, useGlobalState } from "@/lib/global-states";
-import SeveritySelector from "../SeveritySelector";
-import CriticalPanel from "../sos-modal/Critical";
 
 import Chat from "../chat/Chat";
 import { Button } from "@/components/ui/button";
-import { TbPlayerPlay, TbX } from "react-icons/tb";
+
 import StartRequest from "./StartRequest";
 import BenefitsCard from "./BenefitsCard";
-import Image from "next/image";
+
+// Icons
+import { TbX } from "react-icons/tb";
 
 
 interface SosModalProps extends HTMLAttributes<HTMLDivElement> { }
@@ -27,27 +28,27 @@ const SosModal: FC<SosModalProps> = ({ className, ...props }) => {
     const [sosInitiated] = useGlobalState('sosInitiated');
 
     return sosModal ? (
-        <div {...props} className={cn(`absolute top-0 left-0 z-40 w-full h-full pt-4 flex flex-col bg-white text-black ${className}`)}>
+        <div {...props} className={cn(`sos-modal absolute top-0 left-0 z-40 w-full h-full flex flex-col bg-white text-black ${className}`)}>
 
-            {/* Header */}
-            <div className="mb-4 flex justify-between items-center px-4">
+            <div className="sos-header absolute top-0 left-0 w-full z-50 mb-4 flex justify-between items-center pt-4 px-4">
                 <h1 className="text-lg font-medium">inDrive SOS</h1>
                 <Button onClick={() => setGlobalState('sosModal', !sosModal)} variant='outline' size='icon' className="rounded-full">
                     <TbX />
                 </Button>
             </div>
 
-            <figure className="w-full px-4">
-                <Image src='/video.png' width={670} height={368} alt="inDrive Assistance" className="w-auto h-auto rounded-xl border border-border" />
-            </figure>
+            {!sosInitiated &&
+                <div className="pt-16">
+                    <figure className="w-full px-4">
+                        <Image src='/video.png' width={670} height={368} alt="inDrive Assistance" className="w-auto h-auto rounded-xl border border-border" />
+                    </figure>
 
-            <BenefitsCard />
-            <StartRequest />
+                    <BenefitsCard />
+                    <StartRequest />
+                </div>
+            }
 
-            {/* {!sosInitiated && <SeveritySelector />} */}
-            {/* {sosInitiated && <CriticalPanel />} */}
-            {/* {sosInitiated && <Chat />} */}
-
+            {sosInitiated && <Chat />}
 
         </div>
     ) : null

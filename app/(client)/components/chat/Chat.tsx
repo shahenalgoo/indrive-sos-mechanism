@@ -7,6 +7,7 @@ import { FC } from "react";
 import { TbX } from "react-icons/tb";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
+import EmergencyOptions from "./EmergencyOptions";
 
 
 const Chat: FC = () => {
@@ -16,26 +17,11 @@ const Chat: FC = () => {
     const [sosModal] = useGlobalState('sosModal');
 
     return (
-        <Panel className="relative shrink-0 h-full rounded-none p-0">
-
-            {/* Chat Header */}
-            <div className="chat-header absolute top-0 left-0 z-50 w-full h-12 pl-4 pr-2 flex justify-between items-center bg-neutral-900 border-b border-neutral-800">
-                <h1 className="text-center font-bold">
-                    InDrive SOS
-                </h1>
-
-                <Button onClick={() => setGlobalState('sosModal', !sosModal)} size='icon' className="rounded-full">
-                    <TbX />
-                </Button>
-            </div>
-
-            {/* Chat Messages */}
+        <div className="chat relative z-30 h-full">
+            <EmergencyOptions />
             <ChatMessages />
-
-            {/* Chat Input */}
             <ChatInput />
-
-        </Panel>
+        </div>
     )
 }
 

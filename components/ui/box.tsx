@@ -10,7 +10,7 @@ const boxVariants = cva(
     {
         variants: {
             variant: {
-                solid: 'bg-neutral-950 text-white',
+                solid: 'bg-neutral-800 text-white',
                 border: 'border border-border',
                 white: 'bg-white dark:bg-neutral-900'
             },
