@@ -1,4 +1,4 @@
-import RightSidebar from '../../components/RightSidebar';
+import RightSidebar from '../../components/sidebar-right/RightSidebar';
 
 export const metadata = {
 	title: 'InDrive Team'

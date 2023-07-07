@@ -67,7 +67,7 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
     }
 
     return (
-        <div className="absolute bottom-0 left-0 z-50 w-full p-4 bg-neutral-900 border-t border-border">
+        <div className="absolute bottom-0 left-0 z-50 w-full p-4 bg-neutral-100 border-t border-border">
             <TextareaAutosize
                 ref={textareaRef}
                 onKeyDown={onSubmit}
@@ -78,7 +78,7 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
                 // disabled={isLoading}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder='Write a message...'
-                className='pl-4 pr-14 resize-none block w-full rounded-xl border border-neutral-800 focus:border-neutral-700 bg-neutral-800 py-3 text-white outline-none disabled:opacity-50'
+                className='pl-4 pr-14 resize-none block w-full rounded-xl border border-border focus:border-neutral-400 bg-white py-3 text-black outline-none disabled:opacity-50'
             />
         </div>
     )
