@@ -18,9 +18,36 @@ export type SosMessage = Models.Document & {
     message: string;
 }
 
-export type MoodsPrefs = {
+export type MoodsPrefsType = {
     mood: Mood,
     min_talk: boolean,
     no_music: boolean,
     no_smoking: boolean,
+}
+
+export type UserPref = {
+    moodprefs: MoodsPrefs,
+    safety_badge: boolean
+}
+
+/**
+ * Course & Quiz Schemas
+ * 
+ */
+
+export type CourseSchema = {
+    title: string;
+    body: string;
+    jsx?: boolean;
+}
+
+export type QuizSchema = {
+    question: string;
+    options: string[];
+    correct_answer: number;
+}
+
+export type CourseAndQuizSchema = {
+    course?: CourseSchema;
+    quiz?: QuizSchema;
 }

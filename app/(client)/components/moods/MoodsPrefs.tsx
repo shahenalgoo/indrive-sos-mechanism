@@ -1,10 +1,9 @@
 'use client'
 
 import { useUser } from "@/context/SessionContext";
-import { account } from "@/lib/appwrite-config";
 import { Mood } from "@/types/enums";
-import { MoodsPrefs } from "@/types/typings";
-import { FC, useCallback, useEffect, useState } from "react";
+import { MoodsPrefsType } from "@/types/typings";
+import { FC, useEffect, useState } from "react";
 
 interface MoodsPrefsProps {
 
@@ -13,67 +12,37 @@ interface MoodsPrefsProps {
 const MoodsPrefs: FC<MoodsPrefsProps> = () => {
 
     // States
-    const [prefs, setPrefs] = useState<MoodsPrefs>(
+    const [moodPrefs, setMoodPrefs] = useState<MoodsPrefsType>(
         {
             mood: Mood.neutral,
             min_talk: false,
             no_music: false,
             no_smoking: false,
         }
-    )
+    );
 
-    const { isLoggedIn } = useUser();
-
-
-    // Get user mood & preferences
-    //
-    const getPrefs = useCallback(async () => {
-
-        try {
-            const res: MoodsPrefs = await account.getPrefs();
-
-            // Set prefs only if found
-            if (JSON.stringify(res) !== "{}") {
-                setPrefs(res);
-            }
-
-        } catch (error) {
-            console.log(error);
-        }
-
-    }, []);
+    // Hooks
+    const { prefs, updatePrefs } = useUser();
 
 
-    // Set user mood & preferences
-    //
-    const updatePrefs = async () => {
-
-        try {
-            const res = await account.updatePrefs(prefs);
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
-
-    // UEF - Get prefs on init
+    // UEF - set moodprefs
     useEffect(() => {
-        if (isLoggedIn) {
-            getPrefs();
-        }
-    }, [getPrefs]);
+        setMoodPrefs(prefs.moodprefs);
+    }, [prefs]);
 
+    const savePrefs = () => {
+        updatePrefs({ moodprefs: moodPrefs, safety_badge: prefs.safety_badge });
+    }
 
     return (
         <>
             {/*  
                 TODO:
-                Mood switcher between Mood.neutral, Mood.happy, Mood.sad + update prefs = setPrefs({...prefs, mood: Mood.neutral})
-                Toggle for 'prefer minimum talk' + update prefs = setPrefs({...prefs, min_talk: true/false})
-                Toggle for 'prefer no music' + update prefs = setPrefs({...prefs, no_music: true/false})
-                Toggle for 'prefer no smoking' + update prefs = setPrefs({...prefs, no_smoking: true/false})
-                Save Changes button - use updatePrefs() 
+                Mood switcher between Mood.neutral, Mood.happy, Mood.sad + update moodPrefs = setMoodPrefs({...moodPrefs, mood: Mood.neutral})
+                Toggle for 'prefer minimum talk' + update moodPrefs = setMoodPrefs({...moodPrefs, min_talk: true/false})
+                Toggle for 'prefer no music' + update moodPrefs = setMoodPrefs({...moodPrefs, no_music: true/false})
+                Toggle for 'prefer no smoking' + update moodPrefs = setMoodPrefs({...moodPrefs, no_smoking: true/false})
+                Save Changes button - use savePrefs()
             */}
         </>
     );

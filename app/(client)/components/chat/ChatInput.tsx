@@ -29,6 +29,11 @@ const ChatInput: FC = () => {
     const onSubmit = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
+
+            if (input === '') {
+                return;
+            }
+
             sendMessage(user?.$id, input);
             setInput('');
         }
