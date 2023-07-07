@@ -13,20 +13,24 @@ import { Models } from "appwrite";
 import toast from "react-hot-toast";
 import { MoodsPrefsType, UserPref } from "@/types/typings";
 import { Mood } from "@/types/enums";
+import { useRouter } from 'next/navigation';
+
 
 
 // Session typings
 //
 type SessionContextType = {
+    //Session
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isLoggedIn: boolean;
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     user: Models.User<Models.Preferences> | null;
     setUser: React.Dispatch<React.SetStateAction<Models.User<Models.Preferences> | null>>;
-    anonLogin: () => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
 
+    // User Preferences
     prefs: UserPref;
     setPrefs: React.Dispatch<React.SetStateAction<UserPref>>;
     updatePrefs: (newPrefs: UserPref) => Promise<void>
@@ -68,7 +72,6 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<Models.User<Models.Preferences> | null>(null);
 
-    // States
     const [prefs, setPrefs] = useState<UserPref>(
         {
             moodprefs: {
@@ -80,6 +83,9 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
             safety_badge: false
         }
     )
+
+    const router = useRouter();
+
 
     // Fetch User & set login status
     //
@@ -99,7 +105,6 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
             setUser(userData);
             // console.log(userData);
 
-
         } catch (error) {
 
             // Set user data to null on error
@@ -114,21 +119,21 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     }, []);
 
 
-    // Anon Login using Appwrite for CLIENT
+    // Login using Appwrite for CLIENT
     //
-    const anonLogin = async () => {
+    const login = async (email: string, password: string) => {
         setIsLoading(true);
 
         try {
 
-            const login = await account.createAnonymousSession();
+            const login = await account.createEmailSession(email, password);
 
             // Get & set user data
             const userData = await account.get();
             setUser(userData);
             setIsLoggedIn(true);
             console.log(userData);
-
+            router.push('/ride');
 
         } catch (error) {
             // Set user data to null on error
@@ -217,7 +222,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
         setIsLoggedIn,
         user,
         setUser,
-        anonLogin,
+        login,
         logout,
         prefs,
         setPrefs,

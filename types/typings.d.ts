@@ -3,6 +3,8 @@ import { Role, Severity, Mood } from "./enums";
 export type SosReq = Models.Document & {
     severity: Severity;
     initiator: string;
+    initiator_name: string;
+    initiator_phone: string;
     is_active: boolean
     can_speak: boolean;
     req_acknowledged: boolean;
