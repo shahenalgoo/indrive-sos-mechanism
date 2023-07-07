@@ -22,7 +22,7 @@ interface ChatMessagesProps {
 const ChatMessages: FC<ChatMessagesProps> = ({ id }) => {
 
     return (
-        <div className="relative z-40 w-full h-full pb-20 pr-0 bg-neutral-900">
+        <div className="relative z-40 w-full h-full pb-20 pr-0">
             <ScrollArea className="h-full w-full">
                 <div className="flex flex-col gap-2 p-4">
 
@@ -252,8 +252,8 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
                     })}>
 
                         <div className={cn('flex items-center justify-center gap-2 text-sm max-w-[20rem] overflow-x-hidden', {
-                            'order-1 items-end': message.role === 'agent',
-                            'order-2 items-start': message.role !== 'agent',
+                            // 'order-1 items-end': message.role === 'agent',
+                            // 'order-2 items-start': message.role !== 'agent',
                         })}>
 
                             {message.role === 'client' &&
@@ -263,11 +263,9 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
                                 </Avatar>
                             }
 
-                            <span className="text-white">{getTime(message.$createdAt)}</span>
-
-                            <p className={cn(`px-4 py-2 rounded-xl whitespace-pre-line text-md text-white`, {
-                                'bg-neutral-800': message.role === 'agent',
-                                'bg-rose-950': message.role !== 'agent',
+                            <p className={cn(`px-4 py-2 rounded-xl whitespace-pre-line text-md text-black font-semibold`, {
+                                'bg-neutral-200': message.role === 'agent',
+                                'bg-rose-200': message.role !== 'agent',
                             })}>
                                 {message.message}
                             </p>

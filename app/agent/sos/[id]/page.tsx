@@ -117,7 +117,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 
 
 	return (
-		<div className="ChatWrapper relative h-full bg-neutral-200">
+		<div className="chat relative h-full">
 			<ChatMessages id={id} />
 			<ChatInput id={id} sosRequest={sosRequest} />
 		</div>
