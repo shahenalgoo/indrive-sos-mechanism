@@ -15,6 +15,7 @@ import { Query } from "appwrite";
 
 // Lib
 import { setGlobalState } from "@/lib/global-states";
+import { useUser } from "./SessionContext";
 
 
 // SosReq typings
@@ -60,7 +61,7 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [allRequests, setAllReqests] = useState<SosReq[] | null>(null);
 
-
+    const { user } = useUser();
 
 
 
@@ -69,6 +70,11 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
      * 
      */
     const fetchAllRequests = useCallback(async () => {
+        if (!user) {
+            console.log("Cannot fetch messages, user not found");
+            return;
+        }
+
         setIsLoading(true);
 
         try {
@@ -92,7 +98,7 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [user]);
 
 
     // UPDATE SOS

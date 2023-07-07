@@ -1,14 +1,13 @@
 'use client';
 
 // React
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useRouter } from 'next/navigation';
 
 import InputField from "@/components/form/InputField";
 import Box from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
 
-import { account } from "@/lib/appwrite-config";
 import { useUser } from "@/context/SessionContext";
 
 
@@ -19,25 +18,15 @@ const ClientLogin: FC = () => {
     const [email, setEmail] = useState<string>('passenger1@email.com');
     const [password, setPassword] = useState<string>('12345678');
 
-
     // Hooks
     //
-    const router = useRouter();
-    const { user, isLoggedIn, isLoading } = useUser();
+    const { login } = useUser();
 
     // On Submit
     //
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        try {
-            // await account.deleteSession('current');
-            await account.createEmailSession(email, password);
-            router.push("/ride");
-        } catch (error) {
-            console.log("Unable to login:", error);
-
-        }
+        login(email, password);
     }
 
     return (

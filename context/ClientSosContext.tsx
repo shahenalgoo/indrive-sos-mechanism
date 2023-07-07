@@ -64,15 +64,26 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
     const [allMessages, setAllMessages] = useState<SosMessage[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const { isLoggedIn, user } = useUser();
+
     // Fetch User & set login status
     //
     const fetchSosReq = useCallback(async () => {
+        if (!user) {
+            console.log("Cannot fetch messages, user not found");
+            return;
+        }
 
         setIsLoading(true);
 
         try {
 
-            const res = await databases.listDocuments(AppwriteIds.databaseId, AppwriteIds.sosReqId, [Query.equal("is_active", true)]);
+            const res = await databases.listDocuments(AppwriteIds.databaseId, AppwriteIds.sosReqId,
+                [
+                    Query.equal("is_active", true),
+                    Query.equal("initiator", user.$id),
+                ]
+            );
 
             if (res.total > 0) {
                 setSosReq(res.documents[0] as SosReq);
@@ -88,7 +99,6 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
                 setSosReq(null);
             }
 
-
         } catch (error) {
 
             console.log(error);
@@ -97,7 +107,7 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
             setIsLoading(false);
         }
 
-    }, []);
+    }, [user]);
 
 
     // Fetch messages for SOS request
@@ -125,15 +135,11 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
                 console.log("No Messages found");
             }
 
-
         } catch (error) {
-
             console.log(error);
-
-        } finally {
-            setIsLoading(false);
         }
-    }, [sosReq]);
+
+    }, [sosReq, isLoggedIn]);
 
 
     // Agent sends message to client
