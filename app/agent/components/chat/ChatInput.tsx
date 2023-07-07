@@ -22,7 +22,6 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
 
     // Hooks
     //
-    // const { sendMessage } = useClientSos();
     const { user } = useUser();
 
     // No user 😵
@@ -35,6 +34,11 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
     const onSubmit = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
+
+            if (input === '') {
+                return;
+            }
+
             sendMessage();
             setInput('');
         }
