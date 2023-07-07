@@ -59,8 +59,7 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
                 message: input,
                 clientId: sosRequest.initiator
             }
-            const res = await functions.createExecution(process.env.NEXT_PUBLIC_FUNCTION_SEND_MESSAGE as string, JSON.stringify(payload));
-            // setInput('');
+            await functions.createExecution(process.env.NEXT_PUBLIC_FUNCTION_SEND_MESSAGE as string, JSON.stringify(payload));
         } catch (error) {
             console.log(error);
         }

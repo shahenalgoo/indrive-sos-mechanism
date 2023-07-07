@@ -18,7 +18,7 @@ const PeopleDetails: FC<PeopleDetailsProps> = ({ children, title, name, avatarUr
         <div>
             <h3 className="mb-2 text-xs font-semibold text-neutral-400">{title}</h3>
             <Box variant='border' space='sm' className="">
-                <div className="mb-2 flex items-center gap-4 pb-2 border-b border-border">
+                <div className="mb-3 flex items-center gap-4 pb-2 border-b border-border">
                     <Avatar>
                         <AvatarImage src={avatarUrl} />
                         <AvatarFallback>
@@ -27,7 +27,7 @@ const PeopleDetails: FC<PeopleDetailsProps> = ({ children, title, name, avatarUr
                     </Avatar>
                     <div>
                         <h4 className="mb-1 text-sm font-bold">{name}</h4>
-                        <Button size='sm' variant='default'>
+                        <Button size='sm' variant='outline'>
                             View Profile
                         </Button>
                     </div>

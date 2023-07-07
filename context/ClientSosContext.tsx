@@ -25,7 +25,8 @@ type ClientSosContextType = {
     sosReq: SosReq | null;
     setSosReq: React.Dispatch<React.SetStateAction<SosReq | null>>;
     allMessages: SosMessage[];
-    sendMessage: (userId: string, message: string) => Promise<void>
+    sendMessage: (userId: string, message: string) => Promise<void>;
+    updateSos: (sosRequest: SosReq | null, data: any) => Promise<void>
 };
 
 type ClientSosProviderProps = {
@@ -163,6 +164,24 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
         }
     }
 
+
+    // UPDATE SOS
+    //
+    const updateSos = async (sosRequest: SosReq | null, data: any) => {
+        if (!sosRequest) {
+            console.log("SOS REQUEST NOT FOUND");
+            return;
+        }
+
+        try {
+            await databases.updateDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, sosRequest.$id, data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
     // UEF - SOS req messages
     useEffect(() => {
         fetchMessages();
@@ -203,7 +222,8 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
         sosReq,
         setSosReq,
         allMessages: allMessages as SosMessage[],
-        sendMessage
+        sendMessage,
+        updateSos
     };
 
 

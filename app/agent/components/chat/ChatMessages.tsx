@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 import Box from "@/components/ui/box";
-import { TbChecks, TbCircleCheck, TbCircleX, TbLoader2 } from "react-icons/tb";
+import { TbChecks, TbCircleCheck, TbCircleX, TbExclamationCircle, TbLoader2 } from "react-icons/tb";
 
 import { Button } from "@/components/ui/button";
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
@@ -13,78 +13,10 @@ import { cn } from "@/lib/override-classes";
 import { Query } from "appwrite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-
-interface ChatMessagesProps {
-    id: string;
-}
-
-const ChatMessages: FC<ChatMessagesProps> = ({ id }) => {
-
-    return (
-        <div className="relative z-40 w-full h-full pb-20 pr-0">
-            <ScrollArea className="h-full w-full">
-                <div className="flex flex-col gap-2 p-4">
-
-                    {/* <SosProcedureStarted /> */}
-                    {/* <SosAcknowledgement /> */}
-                    {/* <SosCallback /> */}
-                    <AllMessages id={id} />
-
-                </div>
-            </ScrollArea>
-        </div>
-    )
-}
-
-export default ChatMessages;
-
-
-
-
-/**
- * SOS Procedure
- * 
- */
-// const SosProcedureStarted: FC = () => {
-//     return (
-//         <Box space='sm' className="text-sm text-secondary font-semibold flex items-center gap-2">
-//             <TbChecks size={20} strokeWidth={2} />
-//             <span>SOS SENT</span>
-//             <span className="text-xs font-normal text-neutral-400">with all necessary information</span>
-//         </Box>
-//     )
-// }
-
-
-/**
- * SOS Acknowledgement
- * 
- */
-// const SosAcknowledgement: FC = () => {
-
-//     // Hooks
-//     //
-//     const { sosReq } = useClientSos();
-
-//     return (
-//         <Box space='sm'>
-//             {sosReq?.req_acknowledged === false &&
-//                 <div className="text-sm text-orange-300 font-medium flex items-center gap-2">
-//                     <TbLoader2 size={20} strokeWidth={2} className="animate-spin" />
-//                     <span>Awaiting response...</span>
-//                 </div>
-//             }
-//             {sosReq?.req_acknowledged === true &&
-//                 <div className="text-sm text-secondary font-semibold flex items-center gap-2">
-//                     <TbChecks size={20} strokeWidth={2} />
-//                     <span>SOS ACKNOWLEDGED</span>
-//                     <span className="text-xs font-normal text-neutral-400">by safety agent</span>
-//                 </div>
-//             }
-//         </Box>
-//     )
-// }
+import { useAgentSos } from "@/context/AgentSosContext";
+import Acknowledgement from "./feedbacks/Acknowledgement";
+import Callback from "./feedbacks/Callback";
+import ClientInformedPolice from "./feedbacks/ClientInformedPolice";
 
 
 
@@ -277,3 +209,38 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
         </div>
     )
 }
+
+
+
+
+
+
+interface ChatMessagesProps {
+    id: string;
+    sosRequest: SosReq | null
+}
+
+const ChatMessages: FC<ChatMessagesProps> = ({ id, sosRequest }) => {
+
+    return (
+        <div className="relative z-40 w-full h-full pb-20 pr-0">
+            <ScrollArea className="h-full w-full">
+                <div className="flex flex-col gap-3 p-4">
+
+                    {sosRequest &&
+                        <>
+                            <Acknowledgement sosRequest={sosRequest} />
+                            <Callback sosRequest={sosRequest} />
+                            <ClientInformedPolice sosRequest={sosRequest} />
+                        </>
+                    }
+                    {/* <SosCallback /> */}
+                    <AllMessages id={id} />
+
+                </div>
+            </ScrollArea>
+        </div>
+    )
+}
+
+export default ChatMessages;
