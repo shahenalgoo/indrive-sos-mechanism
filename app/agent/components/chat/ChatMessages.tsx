@@ -14,8 +14,9 @@ import { Query } from "appwrite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAgentSos } from "@/context/AgentSosContext";
-import Acknowledgement from "./Acknowledgement";
-import Callback from "./Callback";
+import Acknowledgement from "./feedbacks/Acknowledgement";
+import Callback from "./feedbacks/Callback";
+import ClientInformedPolice from "./feedbacks/ClientInformedPolice";
 
 
 
@@ -230,6 +231,7 @@ const ChatMessages: FC<ChatMessagesProps> = ({ id, sosRequest }) => {
                         <>
                             <Acknowledgement sosRequest={sosRequest} />
                             <Callback sosRequest={sosRequest} />
+                            <ClientInformedPolice sosRequest={sosRequest} />
                         </>
                     }
                     {/* <SosCallback /> */}
