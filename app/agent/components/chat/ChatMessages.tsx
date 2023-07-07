@@ -14,64 +14,8 @@ import { Query } from "appwrite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAgentSos } from "@/context/AgentSosContext";
-
-
-
-
-
-
-
-/**
- * SOS Procedure
- * 
- */
-// const SosProcedureStarted: FC = () => {
-//     return (
-//         <Box space='sm' className="text-sm text-secondary font-semibold flex items-center gap-2">
-//             <TbChecks size={20} strokeWidth={2} />
-//             <span>SOS SENT</span>
-//             <span className="text-xs font-normal text-neutral-400">with all necessary information</span>
-//         </Box>
-//     )
-// }
-
-
-/**
- * SOS Acknowledgement
- * 
- */
-interface SosAcknowledgementProps {
-    sosRequest: SosReq | null
-}
-
-const SosAcknowledgement: FC<SosAcknowledgementProps> = ({ sosRequest }) => {
-
-    // Hooks
-    //
-    const { updateSos } = useAgentSos();
-
-    const handleAcknowledgeReq = () => {
-        updateSos(sosRequest, { req_acknowledged: true } as SosReq);
-    }
-
-    return (
-        <Box variant='border' space='sm' className={`flex justify-between items-center ${sosRequest?.req_acknowledged ? '' : 'bg-orange-300 border-none'}`}>
-            <div className="flex items-center gap-3">
-                {!sosRequest?.req_acknowledged && <TbLoader2 size={20} strokeWidth={2} className="animate-spin opacity-30" />}
-                {sosRequest?.req_acknowledged && <TbChecks size={20} strokeWidth={2} className="text-lime-600" />}
-                <p className="font-semibold">
-                    {!sosRequest?.req_acknowledged && 'The passenger is awaiting a response.'}
-                    {sosRequest?.req_acknowledged && 'You acknowledged the SOS request.'}
-                </p>
-            </div>
-            {!sosRequest?.req_acknowledged &&
-                <Button onClick={handleAcknowledgeReq} variant='default'>
-                    Acknowledge Request
-                </Button>
-            }
-        </Box>
-    )
-}
+import Acknowledgement from "./Acknowledgement";
+import Callback from "./Callback";
 
 
 
@@ -280,10 +224,14 @@ const ChatMessages: FC<ChatMessagesProps> = ({ id, sosRequest }) => {
     return (
         <div className="relative z-40 w-full h-full pb-20 pr-0">
             <ScrollArea className="h-full w-full">
-                <div className="flex flex-col gap-4 p-4">
+                <div className="flex flex-col gap-3 p-4">
 
-                    {/* <SosProcedureStarted /> */}
-                    {sosRequest && <SosAcknowledgement sosRequest={sosRequest} />}
+                    {sosRequest &&
+                        <>
+                            <Acknowledgement sosRequest={sosRequest} />
+                            <Callback sosRequest={sosRequest} />
+                        </>
+                    }
                     {/* <SosCallback /> */}
                     <AllMessages id={id} />
 

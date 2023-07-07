@@ -58,12 +58,6 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	const { updateSos } = useAgentSos();
 
 
-	// Agent acknowledges SOS req
-	const handleAcknowledgeReq = () => {
-		updateSos(sosRequest, { req_acknowledged: true } as SosReq);
-	}
-
-
 	// Agent informs police
 	const handleInformPolice = () => {
 		updateSos(sosRequest, { agent_informed_police: true } as SosReq);
