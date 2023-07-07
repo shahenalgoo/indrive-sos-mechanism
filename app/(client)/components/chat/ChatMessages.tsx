@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { FC, useEffect, useRef } from "react";
 
 import Box from "@/components/ui/box";
-import { TbChecks, TbCircle, TbCircleCheck, TbCircleX, TbLoader2, TbSquareRounded, TbSquareRoundedCheckFilled } from "react-icons/tb";
+import { TbChecks, TbCircle, TbCircleCheck, TbCircleX, TbLoader2, TbSquareRounded, TbSquareRoundedCheckFilled, TbUserShield } from "react-icons/tb";
 import { useClientSos } from "@/context/ClientSosContext";
 import { Button } from "@/components/ui/button";
 import { AppwriteIds, databases } from "@/lib/appwrite-config";
@@ -19,47 +19,14 @@ import toast from "react-hot-toast";
  */
 const SosProcedureStarted: FC = () => {
     return (
-        <Box space='sm' className="text-sm text-secondary font-semibold flex items-center gap-2">
-            <TbChecks size={20} strokeWidth={2} />
-            <span>SOS SENT</span>
-            <span className="text-xs font-normal text-neutral-400">with all necessary information</span>
+        <Box variant='border' space='sm' className="flex items-center gap-1 text-black font-semibold">
+            <TbChecks size={20} strokeWidth={2} className="mr-1 text-lime-500" />
+            <span className="text-sm">SOS SENT</span>
+            <span className="text-xs">with all necessary information.</span>
         </Box>
     )
 }
 
-
-/**
- * SOS Acknowledgement
- * 
- */
-const SosAcknowledgement: FC = () => {
-
-    // Hooks
-    //
-    const { sosReq } = useClientSos();
-
-    return (
-        <div >
-            test
-        </div>
-        // <Box space='sm'>
-        //     {sosReq?.req_acknowledged === false &&
-        //         <div className="text-sm text-orange-300 font-medium flex items-center gap-2">
-        //             <TbLoader2 size={20} strokeWidth={2} className="animate-spin" />
-        //             <span>Awaiting response...</span>
-        //         </div>
-        //     }
-
-        //     {sosReq?.req_acknowledged === true &&
-        //         <div className="text-sm text-secondary font-semibold flex items-center gap-2">
-        //             <TbChecks size={20} strokeWidth={2} />
-        //             <span>SOS ACKNOWLEDGED</span>
-        //             <span className="text-xs font-normal text-neutral-400">by safety agent</span>
-        //         </div>
-        //     }
-        // </Box>
-    )
-}
 
 
 
@@ -86,22 +53,22 @@ const SosCallback: FC = () => {
     }
 
     return (
-        <Box className="p-0">
+        <Box variant='border' className="p-0 shadow-md">
             <div className="px-3 pt-3">
-                <p className="mb-3 text-sm">A safety agent will call you on the phone number associated to this account.</p>
-                <p className="mb-2 text-xs text-neutral-400">If you are unable to speak, tap below and the agent will only chat with you.</p>
+                <p className="mb-3 text-sm font-semibold">A safety agent will call you on the phone number associated to this account.</p>
+                <p className="mb-3 text-xs text-neutral-500">Tap below if unable to speak, and the agent will communicate with you via this chat.</p>
             </div>
 
-            <div className="py-2 px-3 border-t border-neutral-700">
+            <div className="py-2 px-3 border-t border-neutral-200">
                 {sosReq?.can_speak === true &&
-                    <Button onClick={handleCannotSpeak} variant='ghost' className="pl-2 hover:bg-transparent text-rose-400 hover:text-rose-400">
+                    <Button onClick={handleCannotSpeak} variant='ghost' className="pl-2 hover:bg-transparent text-rose-600 hover:text-rose-600">
                         <TbSquareRounded size={24} strokeWidth={1.5} className="mr-2" />
                         I am unable to speak
                     </Button>
                 }
 
                 {sosReq?.can_speak === false &&
-                    <Button onClick={handleCannotSpeak} variant='ghost' className="pl-2 hover:bg-transparent text-lime-400 hover:text-lime-400">
+                    <Button onClick={handleCannotSpeak} variant='ghost' className="pl-2 hover:bg-transparent text-lime-600 hover:text-lime-600">
                         <TbSquareRoundedCheckFilled size={24} strokeWidth={1.5} className="mr-2" />
                         I am unable to speak
                     </Button>
@@ -150,7 +117,7 @@ const AllMessages: FC = () => {
                             'order-2 items-start': message.role !== 'client',
                         })}>
                             <p className={cn(`px-4 py-2 rounded-xl whitespace-pre-line`, {
-                                'bg-neutral-200 text-sm font-medium': message.role === 'client',
+                                'bg-neutral-100 text-sm font-medium': message.role === 'client',
                                 'bg-lime-300 text-md font-semibold': message.role !== 'client',
                             })}>
                                 {message.message}
@@ -173,11 +140,9 @@ const AllMessages: FC = () => {
 const ChatMessages: FC = () => {
 
     return (
-        <div className="chat-messages relative z-40 w-full h-full pt-12 pb-20 pr-0">
-            <SosAcknowledgement />
-
+        <div className="chat-messages relative z-40 w-full h-full pb-32 pr-0">
             <ScrollArea className="h-full w-full">
-                <div className="flex flex-col gap-2 p-4">
+                <div className="flex flex-col gap-3 p-4">
 
                     <SosProcedureStarted />
                     <SosCallback />

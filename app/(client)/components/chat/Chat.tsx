@@ -17,7 +17,7 @@ const Chat: FC = () => {
     const [sosModal] = useGlobalState('sosModal');
 
     return (
-        <div className="chat relative z-30 h-full">
+        <div className="chat relative z-30 h-full pt-16">
             <EmergencyOptions />
             <ChatMessages />
             <ChatInput />
