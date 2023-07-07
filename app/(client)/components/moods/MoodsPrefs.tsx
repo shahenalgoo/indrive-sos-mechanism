@@ -1,5 +1,6 @@
 'use client'
 
+import { useUser } from "@/context/SessionContext";
 import { account } from "@/lib/appwrite-config";
 import { Mood } from "@/types/enums";
 import { MoodsPrefs } from "@/types/typings";
@@ -20,6 +21,8 @@ const MoodsPrefs: FC<MoodsPrefsProps> = () => {
             no_smoking: false,
         }
     )
+
+    const { isLoggedIn } = useUser();
 
 
     // Get user mood & preferences
@@ -56,7 +59,9 @@ const MoodsPrefs: FC<MoodsPrefsProps> = () => {
 
     // UEF - Get prefs on init
     useEffect(() => {
-        getPrefs();
+        if (isLoggedIn) {
+            getPrefs();
+        }
     }, [getPrefs]);
 
 

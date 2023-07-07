@@ -24,7 +24,7 @@ module.exports = {
 				moderate: "#FDBA74",
 				critical: "#f43f5e",
 
-				border: "#262626",
+				border: "#e5e5e5",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
 				background: "hsl(var(--background))",
