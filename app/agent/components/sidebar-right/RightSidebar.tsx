@@ -8,10 +8,10 @@ import { DescriptionList, DT, DD } from "@/components/ui/description-list";
 import { SosReq } from "@/types/typings";
 
 interface RightSidebarProps {
-    sosData: SosReq | null
+    sosRequest: SosReq | null
 }
 
-const RightSidebar: FC<RightSidebarProps> = ({ sosData }) => {
+const RightSidebar: FC<RightSidebarProps> = ({ sosRequest }) => {
 
 
     return (
@@ -51,14 +51,14 @@ const RightSidebar: FC<RightSidebarProps> = ({ sosData }) => {
                     {/* Passenger Info */}
                     <PeopleDetails
                         title="Passenger Information"
-                        name={sosData?.initiator_name || 'Fetching...'}
+                        name={sosRequest?.initiator_name || 'Fetching...'}
                         avatarUrl="https://api.multiavatar.com/dd.png"
                     >
                         <DescriptionList>
                             <div className="grid grid-cols-2 gap-y-3">
                                 <div className=" col-span-2">
                                     <DT>Phone Number</DT>
-                                    <DD>{sosData?.initiator_phone}</DD>
+                                    <DD>{sosRequest?.initiator_phone || 'Fetching...'}</DD>
                                 </div>
                                 <div>
                                     <DT>Emergency Contact</DT>

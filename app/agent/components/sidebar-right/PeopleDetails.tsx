@@ -27,7 +27,7 @@ const PeopleDetails: FC<PeopleDetailsProps> = ({ children, title, name, avatarUr
                     </Avatar>
                     <div>
                         <h4 className="mb-1 text-sm font-bold">{name}</h4>
-                        <Button size='sm' variant='default'>
+                        <Button size='sm' variant='outline'>
                             View Profile
                         </Button>
                     </div>

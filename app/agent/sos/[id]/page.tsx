@@ -91,10 +91,10 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	return (
 		<>
 			<div className="chat relative h-full flex-1">
-				<ChatMessages id={id} />
+				<ChatMessages id={id} sosRequest={sosRequest} />
 				<ChatInput id={id} sosRequest={sosRequest} />
 			</div>
-			<RightSidebar sosData={sosRequest} />
+			<RightSidebar sosRequest={sosRequest} />
 		</>
 	)
 }

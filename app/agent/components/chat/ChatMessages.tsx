@@ -4,7 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
 import Box from "@/components/ui/box";
-import { TbChecks, TbCircleCheck, TbCircleX, TbLoader2 } from "react-icons/tb";
+import { TbChecks, TbCircleCheck, TbCircleX, TbExclamationCircle, TbLoader2 } from "react-icons/tb";
 
 import { Button } from "@/components/ui/button";
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
@@ -13,31 +13,10 @@ import { cn } from "@/lib/override-classes";
 import { Query } from "appwrite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAgentSos } from "@/context/AgentSosContext";
 
 
-interface ChatMessagesProps {
-    id: string;
-}
 
-const ChatMessages: FC<ChatMessagesProps> = ({ id }) => {
-
-    return (
-        <div className="relative z-40 w-full h-full pb-20 pr-0">
-            <ScrollArea className="h-full w-full">
-                <div className="flex flex-col gap-2 p-4">
-
-                    {/* <SosProcedureStarted /> */}
-                    {/* <SosAcknowledgement /> */}
-                    {/* <SosCallback /> */}
-                    <AllMessages id={id} />
-
-                </div>
-            </ScrollArea>
-        </div>
-    )
-}
-
-export default ChatMessages;
 
 
 
@@ -61,30 +40,38 @@ export default ChatMessages;
  * SOS Acknowledgement
  * 
  */
-// const SosAcknowledgement: FC = () => {
+interface SosAcknowledgementProps {
+    sosRequest: SosReq | null
+}
 
-//     // Hooks
-//     //
-//     const { sosReq } = useClientSos();
+const SosAcknowledgement: FC<SosAcknowledgementProps> = ({ sosRequest }) => {
 
-//     return (
-//         <Box space='sm'>
-//             {sosReq?.req_acknowledged === false &&
-//                 <div className="text-sm text-orange-300 font-medium flex items-center gap-2">
-//                     <TbLoader2 size={20} strokeWidth={2} className="animate-spin" />
-//                     <span>Awaiting response...</span>
-//                 </div>
-//             }
-//             {sosReq?.req_acknowledged === true &&
-//                 <div className="text-sm text-secondary font-semibold flex items-center gap-2">
-//                     <TbChecks size={20} strokeWidth={2} />
-//                     <span>SOS ACKNOWLEDGED</span>
-//                     <span className="text-xs font-normal text-neutral-400">by safety agent</span>
-//                 </div>
-//             }
-//         </Box>
-//     )
-// }
+    // Hooks
+    //
+    const { updateSos } = useAgentSos();
+
+    const handleAcknowledgeReq = () => {
+        updateSos(sosRequest, { req_acknowledged: true } as SosReq);
+    }
+
+    return (
+        <Box variant='border' space='sm' className={`flex justify-between items-center ${sosRequest?.req_acknowledged ? '' : 'bg-orange-300 border-none'}`}>
+            <div className="flex items-center gap-3">
+                {!sosRequest?.req_acknowledged && <TbLoader2 size={20} strokeWidth={2} className="animate-spin opacity-30" />}
+                {sosRequest?.req_acknowledged && <TbChecks size={20} strokeWidth={2} className="text-lime-600" />}
+                <p className="font-semibold">
+                    {!sosRequest?.req_acknowledged && 'The passenger is awaiting a response.'}
+                    {sosRequest?.req_acknowledged && 'You acknowledged the SOS request.'}
+                </p>
+            </div>
+            {!sosRequest?.req_acknowledged &&
+                <Button onClick={handleAcknowledgeReq} variant='default'>
+                    Acknowledge Request
+                </Button>
+            }
+        </Box>
+    )
+}
 
 
 
@@ -277,3 +264,33 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
         </div>
     )
 }
+
+
+
+
+
+
+interface ChatMessagesProps {
+    id: string;
+    sosRequest: SosReq | null
+}
+
+const ChatMessages: FC<ChatMessagesProps> = ({ id, sosRequest }) => {
+
+    return (
+        <div className="relative z-40 w-full h-full pb-20 pr-0">
+            <ScrollArea className="h-full w-full">
+                <div className="flex flex-col gap-4 p-4">
+
+                    {/* <SosProcedureStarted /> */}
+                    {sosRequest && <SosAcknowledgement sosRequest={sosRequest} />}
+                    {/* <SosCallback /> */}
+                    <AllMessages id={id} />
+
+                </div>
+            </ScrollArea>
+        </div>
+    )
+}
+
+export default ChatMessages;
