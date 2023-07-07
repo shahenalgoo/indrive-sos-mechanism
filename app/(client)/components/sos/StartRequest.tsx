@@ -42,6 +42,8 @@ const StartRequest: FC = () => {
                 severity: sosSeverity.toLowerCase(),
                 is_active: true,
                 initiator: user?.$id,
+                initiator_name: user?.name,
+                initiator_phone: user?.phone,
                 can_speak: true,
                 req_acknowledged: false,
                 agent_informed_police: false,
