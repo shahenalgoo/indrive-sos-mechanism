@@ -43,7 +43,7 @@ const QuizMcq: FC<QuizMcqProps> = ({ questionData, setScore, onNextQuestion }) =
 
     return (
         <>
-            <div className="mb-10 grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-4">
                 {questionData.options.map((option: any, index: any) => (
                     <RadioCard
                         key={index}
