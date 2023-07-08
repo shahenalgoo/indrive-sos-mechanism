@@ -20,7 +20,6 @@ const StartRequest: FC = () => {
     //
     const [sosModal] = useGlobalState('sosModal');
     const [sosInitiated] = useGlobalState('sosInitiated');
-    const [sosSeverity] = useGlobalState('sosSeverity');
 
 
     // Hooks
@@ -39,7 +38,6 @@ const StartRequest: FC = () => {
 
         try {
             const res = await databases.createDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, ID.unique(), {
-                severity: sosSeverity.toLowerCase(),
                 is_active: true,
                 initiator: user?.$id,
                 initiator_name: user?.name,

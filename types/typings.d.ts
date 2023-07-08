@@ -1,7 +1,6 @@
 import { Models } from "appwrite"
 import { Role, Severity, Mood } from "./enums";
 export type SosReq = Models.Document & {
-    severity: Severity;
     initiator: string;
     initiator_name: string;
     initiator_phone: string;

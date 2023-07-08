@@ -22,7 +22,6 @@ const LeftSidebar: FC = () => {
                         <Link key={i} href={"/agent/sos/" + req.$id} >
                             <Box variant='border' className={params.id === req.$id ? 'border-secondary' : ''}>
                                 <h6 className="font-bold">SOS Request #{allRequests.length - i}</h6>
-                                <p className="text-semibold">Severity: {req.severity}</p>
                             </Box>
                         </Link>
                     ))}
