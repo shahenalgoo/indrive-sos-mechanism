@@ -113,13 +113,7 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
                             {currentSection.course.title}
                         </h1>
 
-                        {currentSection.course.jsx ?
-                            <div className="parsed-body" dangerouslySetInnerHTML={{ __html: currentSection.course.body }}></div>
-                            :
-                            <p className="text-center text-sm">
-                                {currentSection.course.body}
-                            </p>
-                        }
+                        <div className="parsed-body" dangerouslySetInnerHTML={{ __html: currentSection.course.body }}></div>
 
 
                         <NextButton onClick={onNextSection} />
