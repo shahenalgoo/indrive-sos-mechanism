@@ -10,6 +10,7 @@ import RideDetailsModal from './components/ride-details/RideDetailsModal';
 
 // Toaster
 import Toaster from '@/components/misc/Toaster';
+import CheckUser from './components/CheckUser';
 
 
 
