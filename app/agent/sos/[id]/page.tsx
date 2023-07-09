@@ -32,7 +32,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	const [sosRequest, setSosRequest] = useState<SosReq | null>(null);
 
 
-	// FETCH SINGLE SOS REQUEST
+	// Fetch current sos request
 	//
 	const fetchSosRequest = useCallback(async () => {
 		try {
@@ -47,6 +47,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	}, []);
 
 
+	// UEF - fetch + subscribe to changes
 	useEffect(() => {
 		fetchSosRequest();
 
