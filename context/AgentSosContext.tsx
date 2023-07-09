@@ -25,8 +25,6 @@ type AgentSosContextType = {
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     allRequests: SosReq[] | null;
     updateSos: (sosRequest: SosReq | null, data: any) => Promise<void>
-
-    // setAllReqests: React.Dispatch<React.SetStateAction<SosReq[] | null>>
 };
 
 type AgentSosProviderProps = {
@@ -64,14 +62,11 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
     const { user } = useUser();
 
 
-
-    /**
-     * FETCH ALL SOS REQUESTS
-     * 
-     */
+    //Fetch all SOS requests
+    //
     const fetchAllRequests = useCallback(async () => {
         if (!user) {
-            console.log("Cannot fetch messages, user not found");
+            console.log("Cannot fetch sos requests, user not found");
             return;
         }
 
@@ -93,15 +88,17 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
                 setGlobalState('sosInitiated', false)
                 setAllReqests(null);
             }
+
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
+
     }, [user]);
 
 
-    // UPDATE SOS
+    // Update SOS
     //
     const updateSos = async (sosRequest: SosReq | null, data: any) => {
         if (!sosRequest) {
@@ -117,43 +114,8 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
     }
 
 
-    // Use effect to find sos initially
-    useEffect(() => {
-        fetchAllRequests();
-    }, [fetchAllRequests]);
-
-
-
-
-    /**
-     * FETCH SINGLE REQUEST
-     * 
-     */
-    // const fetchSingleRequest = useCallback(async (id: string) => {
-    //     setIsLoading(true);
-    //     try {
-    //         const res = await databases.getDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, id);
-    //         setSingleRequest(res as SosReq);
-    //         console.log(singleRequest);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // }, []);
-
-
-
-
-
-
-
-
-
-
-
-    // Subscribe to changes
+    // UEF - Fetch SOS requests, Subscribe to changes
+    //
     useEffect(() => {
         fetchAllRequests();
 
@@ -166,10 +128,7 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
             // Unsub
             subscribe();
         }
-    }, []);
-
-
-
+    }, [fetchAllRequests]);
 
 
     // Variables made available from context
@@ -179,7 +138,6 @@ export const AgentSosProvider: React.FC<AgentSosProviderProps> = ({ children }: 
         setIsLoading,
         allRequests,
         updateSos
-        // setAllReqests
     }
 
     return (

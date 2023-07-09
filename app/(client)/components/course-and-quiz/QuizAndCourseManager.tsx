@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from "react";
 
 // Typings
 import { CourseAndQuizSchema } from "@/types/typings";
-import { Button, buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../../../../components/ui/button";
 import QuizMcq from "./QuizMcq";
 import NextButton from "./NextButton";
 import { useUser } from "@/context/SessionContext";
@@ -17,6 +17,8 @@ interface CourseAndQuizManagerProps {
 
 const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData }) => {
 
+    // States
+    //
     const sections: CourseAndQuizSchema[] = courseAndQuizData;
     const totalSections = sections.length;
 
@@ -28,30 +30,12 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
     const [totalQuestions, setTotalQuestions] = useState<(number)>(0);
 
-
-    // Go to next section or end quiz
-    const onNextSection = () => {
-        if (currentSectionIndex + 1 < totalSections) {
-            setCurrentSection(sections[currentSectionIndex + 1]);
-            setCurrentSectionIndex(currentSectionIndex + 1);
-        } else {
-            setQuizEnded(true);
-        }
-    }
-
-
-    // Restart
-    const onRestart = () => {
-        if (!sections) return;
-
-        setCurrentSectionIndex(0);
-        setCurrentSection(sections[0]);
-        setScore(0);
-        setQuizEnded(false);
-    };
+    // Hooks
+    const { prefs, updatePrefs } = useUser();
 
 
     // Calculate total number of quizzes
+    //
     const calculateTotalQuestions = () => {
         let total = 0;
         sections.forEach(element => {
@@ -63,8 +47,31 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
         setTotalQuestions(total);
     }
 
-    const { prefs, updatePrefs } = useUser();
+    // Go to next section or end quiz
+    //
+    const onNextSection = () => {
+        if (currentSectionIndex + 1 < totalSections) {
+            setCurrentSection(sections[currentSectionIndex + 1]);
+            setCurrentSectionIndex(currentSectionIndex + 1);
+        } else {
+            setQuizEnded(true);
+        }
+    }
 
+
+    // Restart
+    //
+    const onRestart = () => {
+        if (!sections) return;
+
+        setCurrentSectionIndex(0);
+        setCurrentSection(sections[0]);
+        setScore(0);
+        setQuizEnded(false);
+    };
+
+
+    // Award Badge for 100% Score
     const awardBadge = () => {
         // If score not 100%, no badge
         if (score !== totalQuestions) {
@@ -152,9 +159,6 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
                     :
                     <h3 className="text-2xl mb-4">You need to score 100% to unlock the badge</h3>
                 }
-
-
-
 
                 <div className="flex justify-center gap-4">
                     <Button onClick={onRestart}>

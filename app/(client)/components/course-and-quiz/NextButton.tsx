@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler } from "react";
 import { TbArrowNarrowRight } from "react-icons/tb";
-import { Button } from "../ui/button";
+import { Button } from "../../../../components/ui/button";
 
 interface NextButtonProps {
     onClick: MouseEventHandler<HTMLButtonElement>

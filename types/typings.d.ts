@@ -1,5 +1,10 @@
 import { Models } from "appwrite"
 import { Role, Mood } from "./enums";
+
+/**
+ * SOS Request & Messages Types
+ * 
+ */
 export type SosReq = Models.Document & {
     initiator: string;
     initiator_name: string;
@@ -19,17 +24,6 @@ export type SosMessage = Models.Document & {
     message: string;
 }
 
-export type MoodsPrefsType = {
-    mood: Mood,
-    min_talk: boolean,
-    no_music: boolean,
-    no_smoking: boolean,
-}
-
-export type UserPref = {
-    moodprefs: MoodsPrefs,
-    safety_badge: boolean
-}
 
 /**
  * Course & Quiz Schemas
@@ -51,4 +45,22 @@ export type QuizSchema = {
 export type CourseAndQuizSchema = {
     course?: CourseSchema;
     quiz?: QuizSchema;
+}
+
+
+/**
+ * Mood & Preferences
+ * 
+ */
+
+export type MoodsPrefsType = {
+    mood: Mood,
+    min_talk: boolean,
+    no_music: boolean,
+    no_smoking: boolean,
+}
+
+export type UserPref = {
+    moodprefs: MoodsPrefs,
+    safety_badge: boolean
 }
