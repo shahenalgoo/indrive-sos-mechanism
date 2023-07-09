@@ -106,13 +106,12 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
             // Get & set user data
             const userData = await account.get();
             setUser(userData);
-            // console.log(userData);
 
         } catch (error) {
 
             // Set user data to null on error
             setUser(null);
-            console.log("PLEASE LOG IN TO CONTINUE.");
+            toast.error("Log in to continue");
             console.log(error);
 
         } finally {
@@ -126,23 +125,27 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     //
     const login = async (email: string, password: string) => {
         setIsLoading(true);
-
+        toast.loading("Logging in...");
         try {
 
             const login = await account.createEmailSession(email, password);
 
-            // Get & set user data
             const userData = await account.get();
             setUser(userData);
             setIsLoggedIn(true);
-            console.log(userData);
+
+            toast.dismiss();
+            toast.success("Login Successful");
+
             router.push('/ride');
 
         } catch (error) {
             // Set user data to null on error
             setUser(null);
-            console.log("LOG IN ATEMPT FAILED.");
             console.log(error);
+
+            toast.dismiss();
+            toast.error("Login Failed");
 
         } finally {
             setIsLoading(false);
