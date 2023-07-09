@@ -32,7 +32,7 @@ const PrecautionOptions: FC = () => {
 
             <Item
                 icon={<TbAddressBook size={24} strokeWidth={1} />}
-                title="Trusted Contact"
+                title="Trusted Contacts"
             />
 
             <div className="my-2 w-full h-[1px] bg-border" />
