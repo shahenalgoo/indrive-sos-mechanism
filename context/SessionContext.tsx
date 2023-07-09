@@ -1,6 +1,5 @@
 /**
  * A context to handle user sessions from appwrite
- * Also contains the useUser hook to access user data and states
  * 
  */
 
@@ -10,20 +9,34 @@ import React, { createContext, useState, useEffect, useContext, useCallback } fr
 // Appwrite
 import { account } from "@/lib/appwrite-config";
 import { Models } from "appwrite";
+
+// Lib
 import toast from "react-hot-toast";
+import { useRouter } from 'next/navigation';
+
+// Typings
+import { UserPref } from "@/types/typings";
+import { Mood } from "@/types/enums";
+
 
 
 // Session typings
 //
 type SessionContextType = {
+    //Session
     isLoading: boolean;
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
     isLoggedIn: boolean;
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     user: Models.User<Models.Preferences> | null;
     setUser: React.Dispatch<React.SetStateAction<Models.User<Models.Preferences> | null>>;
-    anonLogin: () => Promise<void>;
-    logout: () => Promise<void>
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
+
+    // User Preferences
+    prefs: UserPref;
+    setPrefs: React.Dispatch<React.SetStateAction<UserPref>>;
+    updatePrefs: (newPrefs: UserPref) => Promise<void>
 };
 
 type SessionProviderProps = {
@@ -62,7 +75,22 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<Models.User<Models.Preferences> | null>(null);
 
-    // Fetch User & set login status
+    const [prefs, setPrefs] = useState<UserPref>(
+        {
+            moodprefs: {
+                mood: Mood.neutral,
+                min_talk: false,
+                no_music: false,
+                no_smoking: false,
+            },
+            safety_badge: false
+        }
+    )
+
+    const router = useRouter();
+
+
+    // Fetch user & set login status
     //
     const fetchUser = useCallback(async () => {
 
@@ -78,14 +106,12 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
             // Get & set user data
             const userData = await account.get();
             setUser(userData);
-            console.log(userData);
-
 
         } catch (error) {
 
             // Set user data to null on error
             setUser(null);
-            console.log("PLEASE LOG IN TO CONTINUE.");
+            toast.error("Log in to continue");
             console.log(error);
 
         } finally {
@@ -95,27 +121,31 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     }, []);
 
 
-    // Anon Login using Appwrite for CLIENT
+    // Login using Appwrite
     //
-    const anonLogin = async () => {
+    const login = async (email: string, password: string) => {
         setIsLoading(true);
-
+        toast.loading("Logging in...");
         try {
 
-            const login = await account.createAnonymousSession();
+            const login = await account.createEmailSession(email, password);
 
-            // Get & set user data
             const userData = await account.get();
             setUser(userData);
             setIsLoggedIn(true);
-            console.log(userData);
 
+            toast.dismiss();
+            toast.success("Login Successful");
+
+            router.push('/ride');
 
         } catch (error) {
             // Set user data to null on error
             setUser(null);
-            console.log("LOG IN ATEMPT FAILED.");
             console.log(error);
+
+            toast.dismiss();
+            toast.error("Login Failed");
 
         } finally {
             setIsLoading(false);
@@ -143,11 +173,50 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     };
 
 
+    // Get user preferences from appwrite
+    //
+    const getPrefs = useCallback(async () => {
+
+        try {
+            const res: UserPref = await account.getPrefs();
+
+            // Set prefs only if found
+            if (JSON.stringify(res) !== "{}") {
+                setPrefs(res);
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, []);
+
+
+    // Set user mood & preferences
+    //
+    const updatePrefs = async (newPrefs: UserPref) => {
+        try {
+            const res = await account.updatePrefs(newPrefs);
+            setPrefs(newPrefs);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     // Use effect
     //
     useEffect(() => {
         fetchUser();
     }, [fetchUser]);
+
+
+    // UEF - Get prefs on init
+    useEffect(() => {
+        if (isLoggedIn) {
+            getPrefs();
+        }
+    }, [isLoggedIn]);
 
 
     // Variables made available from context
@@ -159,8 +228,11 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
         setIsLoggedIn,
         user,
         setUser,
-        anonLogin,
-        logout
+        login,
+        logout,
+        prefs,
+        setPrefs,
+        updatePrefs
     };
 
 
