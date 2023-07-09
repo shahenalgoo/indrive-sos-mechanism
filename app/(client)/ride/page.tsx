@@ -19,16 +19,20 @@ import Logout from '../components/Logout';
 import TipsRotator from '../components/TipsRotator';
 
 
-
-
 export default function Home() {
 
+	// Tips List
+	//
 	const tips = [
-		'Tip 1',
-		'Tip 2',
-		'Tip 3',
-		'Tip 4'
+		"Respect and empathy create a positive ride experience.",
+		"Kindness is contagious, spread it during your ride.",
+		"Everyone has their own story and struggles. Be nice.",
+		"Treat others with the same compassion you expect.",
+		"Embrace diversity, we are all unique individuals.",
+		"Your words and actions can make someone's day better.",
+		"Remember, we're all humans sharing this ride together."
 	]
+
 
 	return (
 		<>
@@ -41,7 +45,7 @@ export default function Home() {
 
 			{/* Tips Rotator */}
 			<div className="absolute top-16 left-0 z-30 w-full px-3">
-				<TipsRotator tips={tips} interval={2000} />
+				<TipsRotator tips={tips} interval={5000} />
 			</div>
 
 
