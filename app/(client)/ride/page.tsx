@@ -16,17 +16,32 @@ import { setGlobalState } from '@/lib/global-states';
 // Other Comps
 import RideTriggers from '../components/RideTriggers';
 import Logout from '../components/Logout';
+import TipsRotator from '../components/TipsRotator';
 
 
 
 
 export default function Home() {
+
+	const tips = [
+		'Tip 1',
+		'Tip 2',
+		'Tip 3',
+		'Tip 4'
+	]
+
 	return (
 		<>
 
 			{/* Header */}
 			<div className='absolute top-0 left-0 z-30 w-full px-4 py-2 bg-white border-b-2 border-border'>
 				<Logout />
+			</div>
+
+
+			{/* Tips Rotator */}
+			<div className="absolute top-16 left-0 z-30 w-full px-3">
+				<TipsRotator tips={tips} interval={2000} />
 			</div>
 
 
