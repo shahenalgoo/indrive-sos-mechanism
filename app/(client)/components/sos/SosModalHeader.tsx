@@ -1,8 +1,20 @@
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+// React
 import { FC } from "react";
-import Acknowledgement from "../chat/Acknowledgement";
+
+// Components
 import { Button } from "@/components/ui/button";
+
+// Icons
 import { TbX } from "react-icons/tb";
+
+// Libs
+import { setGlobalState, useGlobalState } from "@/lib/global-states";
+
+// SOS
+import Acknowledgement from "../chat/feedbacks/Acknowledgement";
+
+
+
 
 const SosModalHeader: FC = () => {
 

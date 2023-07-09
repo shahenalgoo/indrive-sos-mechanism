@@ -1,13 +1,27 @@
-import Box from "@/components/ui/box";
-import { useUser } from "@/context/SessionContext";
+// React
 import { FC } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { TbCurrentLocation, TbLoader2 } from "react-icons/tb";
+
+// Icons
 import { Mood } from "@/types/enums";
+
+// Components
+import Box from "@/components/ui/box";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DD, DT, DescriptionList } from "@/components/ui/description-list";
+
+// Icons
+import { TbCurrentLocation, TbLoader2 } from "react-icons/tb";
+
+// Hooks
+import { useUser } from "@/context/SessionContext";
+
+
+
 
 const RideDetailsRider: FC = () => {
 
+    // Hooks
+    //
     const { user, prefs } = useUser();
 
     return (
@@ -33,19 +47,19 @@ const RideDetailsRider: FC = () => {
                 <div className="grid grid-cols-2 gap-y-3">
                     <div>
                         <DT>Safety Badge</DT>
-                        <DD>{prefs.safety_badge ? 'Acquired' : 'Not yet'}</DD>
+                        <DD>{prefs.safety_badge === true ? 'Acquired' : 'Not yet'}</DD>
                     </div>
                     <div>
                         <DT>Conversations</DT>
-                        <DD>{prefs.moodprefs.min_talk ? 'Keep minimal' : 'Open to'}</DD>
+                        <DD>{prefs.moodprefs.min_talk === true ? 'Keep minimal' : 'Open to'}</DD>
                     </div>
                     <div>
                         <DT>Music</DT>
-                        <DD>{prefs.moodprefs.no_music ? "It's Okay" : 'Keep it down'}</DD>
+                        <DD>{prefs.moodprefs.no_music === true ? "It's Okay" : 'Keep it down'}</DD>
                     </div>
                     <div>
                         <DT>Smoking</DT>
-                        <DD>{prefs.moodprefs.no_smoking ? "It's Okay" : "Prefer not to"}</DD>
+                        <DD>{prefs.moodprefs.no_smoking === true ? "It's Okay" : "Prefer not to"}</DD>
                     </div>
                 </div>
             </DescriptionList>

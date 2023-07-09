@@ -1,7 +1,19 @@
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+'use client';
+
+// React
 import { FC } from "react";
+
+// Components
 import { Button } from "@/components/ui/button";
+
+// Libs
 import { TbX } from "react-icons/tb";
+
+// Libs
+import { setGlobalState, useGlobalState } from "@/lib/global-states";
+
+
+
 
 const PrecautionsModalHeader: FC = () => {
 

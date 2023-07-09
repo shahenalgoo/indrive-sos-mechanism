@@ -1,20 +1,17 @@
 'use client';
 
-import Panel from "@/components/ui/panel";
-import { Button } from "@/components/ui/button";
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+// React
 import { FC } from "react";
-import { TbX } from "react-icons/tb";
+
+// Chat
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import EmergencyOptions from "./EmergencyOptions";
+import EmergencyOptions from "./feedbacks/EmergencyOptions";
+
+
 
 
 const Chat: FC = () => {
-
-    // States
-    //
-    const [sosModal] = useGlobalState('sosModal');
 
     return (
         <div className="chat relative z-30 h-full pt-16">

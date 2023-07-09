@@ -3,32 +3,39 @@
 // React
 import { FC } from "react";
 
+// Typings
+import { SosReq } from "@/types/typings";
+
 // Components
 import { Button } from "@/components/ui/button";
+
+// Icons
 import { TbArrowRight } from "react-icons/tb";
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+
+// Libs
+import { setGlobalState } from "@/lib/global-states";
+
+// Hooks
 import { useUser } from "@/context/SessionContext";
 import { useClientSos } from "@/context/ClientSosContext";
+
+// Appwrite db
 import { AppwriteIds, databases } from "@/lib/appwrite-config";
 import { ID } from "appwrite";
-import { SosReq } from "@/types/typings";
+
+
 
 
 const StartRequest: FC = () => {
 
-    // States
-    //
-    const [sosModal] = useGlobalState('sosModal');
-    const [sosInitiated] = useGlobalState('sosInitiated');
-
-
     // Hooks
     //
     const { user } = useUser();
-    const { sosReq, setSosReq } = useClientSos();
+    const { sosReq } = useClientSos();
 
 
     // Create SOS Request
+    //
     const handleSOSReq = async () => {
         if (sosReq) {
             console.log("SOS REQ ALREADY ACTIVE");
@@ -62,7 +69,6 @@ const StartRequest: FC = () => {
 
     return (
         <div className="mt-auto p-4 bg-neutral-100">
-
             <p className="mb-4 text-xs text-neutral-500 text-center">
                 By using the button below, you agree to the <br />
                 <a href="/ride" className="underline text-black font-bold">terms & conditions</a> of the inDrive SOS System.
@@ -72,7 +78,6 @@ const StartRequest: FC = () => {
                 Request Assistance
                 <TbArrowRight size={20} strokeWidth={2} className="ml-2" />
             </Button>
-
         </div>
     );
 }

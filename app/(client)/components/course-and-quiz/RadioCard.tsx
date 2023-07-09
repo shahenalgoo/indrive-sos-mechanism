@@ -1,10 +1,17 @@
+'use client';
+
 // React
 import React from 'react';
 
 // Utils
 import { VariantProps, cva } from 'class-variance-authority';
-import { TbCheck } from 'react-icons/tb';
 import { cn } from '@/lib/override-classes';
+
+// Icons
+import { TbCheck } from 'react-icons/tb';
+
+
+
 
 const radioVariants = cva(
     'radio relative cursor-pointer select-none flex-1 flex items-center py-3 px-4 text-xs font-semibold ',

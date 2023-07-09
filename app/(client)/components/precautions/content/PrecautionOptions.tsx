@@ -1,11 +1,19 @@
+'use client';
 
+// React
 import { FC, MouseEventHandler } from "react";
-import Box from "@/components/ui/box";
-import { Tb24Hours, TbAddressBook, TbChevronRight, TbCurrentLocation, TbHeartHandshake, TbMessageExclamation, TbMicrophone, TbMoodSmile, TbSos, TbUserCheck } from "react-icons/tb";
-import { PiSirenThin } from "react-icons/pi";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+
+// Components
+import { Button } from "@/components/ui/button";
+
+// Icons
+import { TbAddressBook, TbChevronRight, TbCurrentLocation, TbMicrophone, TbMoodSmile, TbUserCheck } from "react-icons/tb";
+
+// Libs
 import { setGlobalState } from "@/lib/global-states";
+
+
 
 
 const PrecautionOptions: FC = () => {

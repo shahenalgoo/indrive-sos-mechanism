@@ -1,16 +1,29 @@
 'use client';
 
-import { ScrollArea } from "@/components/ui/scroll-area";
+// React
 import { FC, useEffect, useRef } from "react";
 
-import Box from "@/components/ui/box";
-import { TbChecks, TbCircle, TbCircleCheck, TbCircleX, TbLoader2, TbSquareRounded, TbSquareRoundedCheckFilled, TbUserShield } from "react-icons/tb";
-import { useClientSos } from "@/context/ClientSosContext";
-import { Button } from "@/components/ui/button";
-import { AppwriteIds, databases } from "@/lib/appwrite-config";
+// Typings
 import { SosReq } from "@/types/typings";
+
+// Components
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Box from "@/components/ui/box";
+import { Button } from "@/components/ui/button";
+
+// Icons
+import { TbChecks, TbSquareRounded, TbSquareRoundedCheckFilled } from "react-icons/tb";
+
+// Hooks
+import { useClientSos } from "@/context/ClientSosContext";
+
+// Appwrite
+import { AppwriteIds, databases } from "@/lib/appwrite-config";
+
+// Libs
 import { cn } from "@/lib/override-classes";
-import toast from "react-hot-toast";
+
+
 
 
 /**

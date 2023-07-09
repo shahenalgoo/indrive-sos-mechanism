@@ -1,9 +1,19 @@
-import Box from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { setGlobalState } from "@/lib/global-states";
-import { useRouter } from "next/navigation";
+'use client';
+
+// React
 import { FC } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+// Components
+import Box from "@/components/ui/box";
+import { Button } from "@/components/ui/button";
+
+// Libs
+import { setGlobalState } from "@/lib/global-states";
+
+
+
 
 const PrecautionEducation: FC = () => {
 

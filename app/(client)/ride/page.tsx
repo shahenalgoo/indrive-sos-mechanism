@@ -1,27 +1,34 @@
 'use client';
 
+// React
 import Image from 'next/image';
-// Components
 
-import RideTriggers from '../components/RideTriggers';
-import MoodsPrefs from '../components/moods/MoodsPrefs';
-import { TbChevronUp, TbCircleCheckFilled, TbLoader, TbLoader2, TbMessage, TbPhone, TbStarFilled } from 'react-icons/tb';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// Components
 import { Button } from '@/components/ui/button';
-import Logout from '../components/Logout';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// Icons
+import { TbCircleCheckFilled, TbLoader2, TbMessage, TbPhone, TbStarFilled } from 'react-icons/tb';
+
+// Libs
 import { setGlobalState } from '@/lib/global-states';
+
+// Other Comps
+import RideTriggers from '../components/RideTriggers';
+import Logout from '../components/Logout';
+
 
 
 
 export default function Home() {
 	return (
 		<>
-			<MoodsPrefs />
 
 			{/* Header */}
 			<div className='absolute top-0 left-0 z-30 w-full px-4 py-2 bg-white border-b-2 border-border'>
 				<Logout />
 			</div>
+
 
 			{/* Ride Details */}
 			<div className='absolute bottom-0 left-0 z-30 w-full'>
@@ -73,6 +80,7 @@ export default function Home() {
 					</Button>
 				</div>
 			</div>
+
 
 			{/* MAP DEMO */}
 			<figure className='z-10 absolute top-0 left-0 w-full h-full'>

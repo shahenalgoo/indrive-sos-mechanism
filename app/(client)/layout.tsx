@@ -1,11 +1,21 @@
 import '../globals.scss';
 
+// Provider
 import ClientProviders from '@/components/ClientProviders';
+
+// Modals
 import SosModal from './components/sos/SosModal';
-import Toaster from '@/components/misc/Toaster';
 import PrecautionsModal from './components/precautions/PrecautionModal';
 import RideDetailsModal from './components/ride-details/RideDetailsModal';
 
+// Toaster
+import Toaster from '@/components/misc/Toaster';
+
+
+
+
+// Metadata
+//
 export const metadata = {
 	title: 'InDrive SOS'
 }
