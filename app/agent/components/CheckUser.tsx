@@ -23,10 +23,6 @@ const CheckUser: FC<CheckUserProps> = ({ children }) => {
     //
     const { isLoading, isLoggedIn, user } = useUser();
 
-    console.log(isLoading);
-    console.log(isLoggedIn);
-
-
 
     // If user is not logged in
     //
