@@ -24,12 +24,12 @@ const LeftSidebar: FC = () => {
 
 
     return (
-        <aside className="shrink-0 w-80 h-full border-r border-border text-black">
+        <aside className="shrink-0 w-80 h-screen border-r border-border text-black">
             <ScrollArea className="h-full w-full">
                 <div className="flex flex-col gap-2 p-2">
                     {allRequests?.map((req, i) => (
                         <Link key={i} href={"/agent/sos/" + req.$id} >
-                            <Box variant='border' className={params.id === req.$id ? 'border-secondary' : ''}>
+                            <Box variant='border' className={params.id === req.$id ? 'border-black' : ''}>
                                 <h6 className="font-bold">SOS Request #{allRequests.length - i}</h6>
                             </Box>
                         </Link>
