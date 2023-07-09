@@ -1,15 +1,30 @@
-import { Button } from "@/components/ui/button";
-import { useClientSos } from "@/context/ClientSosContext";
-import { SosReq } from "@/types/typings";
+// React
 import { FC } from "react";
 
+// Tpyings
+import { SosReq } from "@/types/typings";
+
+// Components
+import { Button } from "@/components/ui/button";
+
+// Icons
 import { MdOutlineLocalPolice } from 'react-icons/md';
+
+// Hooks
+import { useClientSos } from "@/context/ClientSosContext";
+
+
+
 
 const EmergencyOptions: FC = () => {
 
+    // Hooks
+    //
     const { sosReq, updateSos } = useClientSos();
 
+
     // Update request
+    //
     const handleInformPolice = () => {
         updateSos(sosReq, { initiator_informed_police: true } as SosReq);
     }

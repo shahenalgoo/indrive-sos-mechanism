@@ -2,14 +2,23 @@
 
 // React
 import { FC, useEffect, useState } from "react";
+import Link from "next/link";
 
 // Typings
 import { CourseAndQuizSchema } from "@/types/typings";
-import { Button, buttonVariants } from "../../../../components/ui/button";
+
+// Components
+import { Button, buttonVariants } from "@/components/ui/button";
+
+// Hooks
+import { useUser } from "@/context/SessionContext";
+
+// Quiz
 import QuizMcq from "./QuizMcq";
 import NextButton from "./NextButton";
-import { useUser } from "@/context/SessionContext";
-import Link from "next/link";
+
+
+
 
 interface CourseAndQuizManagerProps {
     courseAndQuizData: CourseAndQuizSchema[]
@@ -30,7 +39,9 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
     const [totalQuestions, setTotalQuestions] = useState<(number)>(0);
 
+
     // Hooks
+    //
     const { prefs, updatePrefs } = useUser();
 
 
@@ -46,6 +57,7 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
         setTotalQuestions(total);
     }
+
 
     // Go to next section or end quiz
     //
@@ -115,7 +127,6 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
                         <div className="parsed-body" dangerouslySetInnerHTML={{ __html: currentSection.course.body }}></div>
 
-
                         <NextButton onClick={onNextSection} />
                     </>
                 }
@@ -143,7 +154,6 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
             <div className="text-center">
                 <h3 className="text-2xl mb-4">Congrats, you completed the course!</h3>
 
-                {/* Display score */}
                 {totalQuestions > 0 &&
                     <h3 className="text-2xl mb-4">Your score: {score}/{totalQuestions}</h3>
                 }
@@ -168,11 +178,9 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
     }
 
     return (
-        <>
-            <div className="px-4 h-full flex flex-col justify-center gap-8">
-                {quizEnded ? endScreen() : courseAndQuiz()}
-            </div>
-        </>
+        <div className="px-4 h-full flex flex-col justify-center gap-8">
+            {quizEnded ? endScreen() : courseAndQuiz()}
+        </div>
     );
 }
 

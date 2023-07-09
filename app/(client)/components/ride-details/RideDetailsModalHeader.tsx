@@ -1,7 +1,19 @@
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+'use client';
+
+// React
 import { FC } from "react";
+
+// Components
 import { Button } from "@/components/ui/button";
+
+// Icons
 import { TbX } from "react-icons/tb";
+
+// Libs
+import { setGlobalState } from "@/lib/global-states";
+
+
+
 
 const RideDetailsModalHeader: FC = () => {
 

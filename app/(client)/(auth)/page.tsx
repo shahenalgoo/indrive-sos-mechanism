@@ -1,4 +1,3 @@
-
 // Components
 import ClientLogin from '@/app/(client)/(auth)/ClientLogin';
 

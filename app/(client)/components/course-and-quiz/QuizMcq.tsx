@@ -1,11 +1,20 @@
+'use client';
+
 // React
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 
 // Typings
 import { QuizSchema } from "@/types/typings";
+
+// Components
+import toast from "react-hot-toast";
+
+// Quiz
 import NextButton from "./NextButton";
 import RadioCard from "./RadioCard";
-import toast from "react-hot-toast";
+
+
+
 
 interface QuizMcqProps {
     questionData: QuizSchema;
@@ -13,24 +22,22 @@ interface QuizMcqProps {
     onNextQuestion: () => void;
 }
 
-/**
- * Component for Multiple choice questions
- * 
- */
-
 const QuizMcq: FC<QuizMcqProps> = ({ questionData, setScore, onNextQuestion }) => {
 
     // States
+    //
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
 
 
     // Option selector
+    //
     const onOptionChange = (index: number) => {
         setSelectedOption(index);
     };
 
 
     // Check correct answer before proceeding
+    //
     const checkWin = () => {
         if (selectedOption === null) {
             toast.error("Please choose an option");

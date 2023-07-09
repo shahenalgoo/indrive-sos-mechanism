@@ -1,6 +1,14 @@
-import { useClientSos } from "@/context/ClientSosContext";
+// React
 import { FC } from "react";
+
+// Hooks
+import { useClientSos } from "@/context/ClientSosContext";
+
+// Icons
 import { TbLoader2, TbUserShield } from "react-icons/tb";
+
+
+
 
 const Acknowledgement: FC = () => {
 

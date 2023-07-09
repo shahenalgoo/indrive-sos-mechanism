@@ -1,8 +1,11 @@
-
+// React
 import { FC } from "react";
-import Box from "@/components/ui/box";
-import { Tb24Hours, TbHeartHandshake, TbMessageExclamation, TbSos } from "react-icons/tb";
+
+// Icons
+import { Tb24Hours, TbHeartHandshake } from "react-icons/tb";
 import { PiSirenThin } from "react-icons/pi";
+
+
 
 
 const BenefitsCard: FC = () => {

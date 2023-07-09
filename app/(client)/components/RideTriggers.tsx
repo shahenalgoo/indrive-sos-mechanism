@@ -1,17 +1,24 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { useClientSos } from "@/context/ClientSosContext";
-import { setGlobalState, useGlobalState } from "@/lib/global-states";
+// React
 import { FC } from "react";
-import { TbAlertTriangleFilled, TbLoader2, TbShieldCheckFilled, TbSos } from "react-icons/tb";
+
+// Components
+import { Button } from "@/components/ui/button";
+
+// Icons
+import { TbShieldCheckFilled, TbSos } from "react-icons/tb";
+
+// Libs
+import { setGlobalState, useGlobalState } from "@/lib/global-states";
+
+
 
 
 const RideTriggers: FC = () => {
 
     // States
     //
-    const [precautionsModal] = useGlobalState('precautionsModal');
     const [sosModal] = useGlobalState('sosModal');
     const [sosInitiated] = useGlobalState('sosInitiated');
 

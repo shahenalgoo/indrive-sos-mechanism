@@ -1,28 +1,37 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { useUser } from "@/context/SessionContext";
-import { redirect, useRouter } from "next/navigation";
+// React
 import { FC } from "react";
-import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
+// Components
+import { Button } from "@/components/ui/button";
+
+// Hooks
+import { useUser } from "@/context/SessionContext";
+
+
 
 
 const Logout: FC = () => {
 
+    // Hooks
+    //
     const { logout } = useUser();
     const router = useRouter();
 
+    // Logout
+    //
     const onLogout = async () => {
         logout();
         router.push('/')
-        // toast.success("You've been logged out.")
     }
 
     return (
         <Button onClick={onLogout} variant='ghost'>
             Logout
         </Button>
-    );
+    )
 }
 
 export default Logout;

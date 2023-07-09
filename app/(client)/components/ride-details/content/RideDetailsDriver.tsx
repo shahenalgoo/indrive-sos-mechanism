@@ -1,8 +1,16 @@
+// React
 import { FC } from "react";
+
+// Components
 import Box from "@/components/ui/box";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { TbCircleCheckFilled, TbLoader2 } from "react-icons/tb";
 import { DD, DT, DescriptionList } from "@/components/ui/description-list";
+
+// Icons
+import { TbCircleCheckFilled, TbLoader2 } from "react-icons/tb";
+
+
+
 
 const RideDetailsDriver: FC = () => {
 
