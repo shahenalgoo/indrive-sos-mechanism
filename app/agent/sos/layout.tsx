@@ -19,7 +19,7 @@ export default function RootLayout({
 		<html lang="en">
 			<AgentProviders>
 				<CheckUser>
-					<body className='h-[calc(100vh_-_56px)] overflow-hidden'>
+					<body className='h-[calc(100vh_-_120px)] overflow-hidden'>
 						<NavbarAgent />
 
 						<main className='mt-14 h-full flex'>

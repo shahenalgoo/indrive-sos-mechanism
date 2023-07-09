@@ -3,67 +3,12 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
-import Box from "@/components/ui/box";
-import { TbChecks, TbCircleCheck, TbCircleX, TbExclamationCircle, TbLoader2 } from "react-icons/tb";
-
-import { Button } from "@/components/ui/button";
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
 import { SosMessage, SosReq } from "@/types/typings";
 import { cn } from "@/lib/override-classes";
 import { Query } from "appwrite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAgentSos } from "@/context/AgentSosContext";
-import Acknowledgement from "./feedbacks/Acknowledgement";
-import Callback from "./feedbacks/Callback";
-import ClientInformedPolice from "./feedbacks/ClientInformedPolice";
-
-
-
-/**
- * SOS CALLBACK
- * 
- */
-// const SosCallback: FC = () => {
-
-//     // Hooks
-//     //
-//     const { sosReq } = useClientSos();
-
-//     const handleCannotSpeak = async () => {
-//         if (!sosReq) {
-//             console.log("SOS REQUEST NOT FOUND");
-//             return;
-//         }
-//         try {
-//             await databases.updateDocument(AppwriteIds.databaseId, AppwriteIds.sosReqId, sosReq.$id, { can_speak: !sosReq.can_speak } as SosReq)
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-
-//     return (
-//         <Box className="text-sm">
-//             <p className="mb-4">A safety agent will call you on the number associated to this account.</p>
-//             <p className="mb-2 text-neutral-400">Tap below if you {sosReq?.can_speak ? 'cannot' : 'can'} speak:</p>
-
-//             {sosReq?.can_speak === true &&
-//                 <Button onClick={handleCannotSpeak} variant='accent' className="pl-2">
-//                     <TbCircleCheck size={24} strokeWidth={1.5} className="mr-2" />
-//                     I am able to speak
-//                 </Button>
-//             }
-
-//             {sosReq?.can_speak === false &&
-//                 <Button onClick={handleCannotSpeak} variant='destructive' className="pl-2">
-//                     <TbCircleX size={24} strokeWidth={1.2} className="mr-2" />
-//                     I am unable to speak
-//                 </Button>
-//             }
-//         </Box>
-//     )
-// }
-
 
 
 /**
@@ -227,14 +172,6 @@ const ChatMessages: FC<ChatMessagesProps> = ({ id, sosRequest }) => {
             <ScrollArea className="h-full w-full">
                 <div className="flex flex-col gap-3 p-4">
 
-                    {sosRequest &&
-                        <>
-                            <Acknowledgement sosRequest={sosRequest} />
-                            <Callback sosRequest={sosRequest} />
-                            <ClientInformedPolice sosRequest={sosRequest} />
-                        </>
-                    }
-                    {/* <SosCallback /> */}
                     <AllMessages id={id} />
 
                 </div>
