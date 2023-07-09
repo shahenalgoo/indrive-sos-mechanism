@@ -119,6 +119,9 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
             return;
         }
 
+        // Clear before fetching
+        setAllMessages(null);
+
         try {
 
             const res = await databases.listDocuments(AppwriteIds.databaseId, AppwriteIds.messagesId,
