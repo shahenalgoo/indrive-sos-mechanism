@@ -2,7 +2,6 @@
 
 // React
 import { FC, MouseEventHandler } from "react";
-import { useRouter } from "next/navigation";
 
 // Components
 import { Button } from "@/components/ui/button";
@@ -10,32 +9,16 @@ import { Button } from "@/components/ui/button";
 // Icons
 import { TbAddressBook, TbChevronRight, TbCurrentLocation, TbMicrophone, TbMoodSmile, TbUserCheck } from "react-icons/tb";
 
-// Libs
-import { setGlobalState } from "@/lib/global-states";
-
 
 
 
 const PrecautionOptions: FC = () => {
-
-    // Hooks
-    //
-    const router = useRouter();
-
-
-    // Go to ed page
-    //
-    const handleGoMoodPref = () => {
-        router.push('/');
-        setGlobalState('precautionsModal', false);
-    }
 
     return (
         <div className="mt-8">
             <Item
                 icon={<TbMoodSmile size={24} strokeWidth={1} />}
                 title="Mood & Preferences"
-                onClick={handleGoMoodPref}
             />
 
             <div className="my-2 w-full h-[1px] bg-border" />

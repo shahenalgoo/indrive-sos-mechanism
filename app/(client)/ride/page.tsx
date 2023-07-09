@@ -45,7 +45,7 @@ export default function Home() {
 
 			{/* Tips Rotator */}
 			<div className="absolute top-16 left-0 z-30 w-full px-3">
-				<TipsRotator tips={tips} interval={5000} />
+				<TipsRotator tips={tips} interval={4000} />
 			</div>
 
 

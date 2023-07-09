@@ -32,7 +32,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	const [sosRequest, setSosRequest] = useState<SosReq | null>(null);
 
 
-	// FETCH SINGLE SOS REQUEST
+	// Fetch current sos request
 	//
 	const fetchSosRequest = useCallback(async () => {
 		try {
@@ -47,6 +47,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 	}, []);
 
 
+	// UEF - fetch + subscribe to changes
 	useEffect(() => {
 		fetchSosRequest();
 
@@ -64,7 +65,7 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 		<>
 			<ChatHeader sosRequest={sosRequest} />
 
-			<div className="flex h-full">
+			<div className="flex h-[calc(100%_-_64px)]">
 				<div className="chat relative h-full flex-1">
 					<ChatMessages id={id} sosRequest={sosRequest} />
 					<ChatInput id={id} sosRequest={sosRequest} />

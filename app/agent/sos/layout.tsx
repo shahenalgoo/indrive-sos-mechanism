@@ -23,8 +23,8 @@ export default function RootLayout({
 		<html lang="en">
 			<AgentProviders>
 				<CheckUser>
-					<body className='h-[calc(100vh_-_56px)] overflow-hidden'>
-						<main className='h-full flex'>
+					<body className='overflow-hidden'>
+						<main className='flex'>
 
 							<LeftSidebar />
 							{children}
