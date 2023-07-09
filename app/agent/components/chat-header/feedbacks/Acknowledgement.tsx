@@ -23,18 +23,18 @@ const Acknowledgement: FC<AcknowledgementProps> = ({ sosRequest }) => {
     }
 
     return (
-        <Box space='sm' className={`flex justify-between items-center text-black ${sosRequest?.req_acknowledged ? 'bg-lime-200' : 'bg-orange-300'}`}>
-            <div className="flex items-center gap-3">
+        <Box space='sm' className={`h-10 p-1 flex justify-between items-center text-xs text-black border-none ${sosRequest?.req_acknowledged ? 'bg-lime-200' : 'bg-orange-300'}`}>
+            <div className="flex items-center gap-2 ml-1">
                 {!sosRequest?.req_acknowledged && <TbLoader2 size={20} strokeWidth={2} className="animate-spin opacity-30" />}
                 {sosRequest?.req_acknowledged && <TbChecks size={20} strokeWidth={2} className="text-lime-600" />}
-                <p className="font-semibold">
-                    {!sosRequest?.req_acknowledged && 'The passenger is awaiting a response.'}
-                    {sosRequest?.req_acknowledged && 'You acknowledged the SOS request.'}
+                <p className="font-semibold pr-3">
+                    {!sosRequest?.req_acknowledged && 'Acknowledge'}
+                    {sosRequest?.req_acknowledged && 'Acknowledged'}
                 </p>
             </div>
             {!sosRequest?.req_acknowledged &&
-                <Button onClick={handleAcknowledge} variant='default'>
-                    <TbChecks size={20} strokeWidth={2} className="mr-2" /> Acknowledge Request
+                <Button onClick={handleAcknowledge} variant='default' size='sm'>
+                    Confirm
                 </Button>
             }
         </Box>

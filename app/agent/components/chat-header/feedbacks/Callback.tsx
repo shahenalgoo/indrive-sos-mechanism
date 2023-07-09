@@ -10,18 +10,15 @@ interface CallbackProps {
 
 const Callback: FC<CallbackProps> = ({ sosRequest }) => {
     return (
-        <Box space='sm' className={`flex justify-between items-center text-black ${sosRequest?.can_speak ? 'bg-lime-200' : 'bg-rose-200'}`}>
-            <div className="flex items-center gap-3">
+        <Box space='sm' className={`h-10 p-1 flex justify-between items-center text-xs text-black border-none ${sosRequest?.can_speak ? 'bg-lime-200' : 'bg-rose-200'}`}>
+            <div className="flex items-center gap-2 ml-1">
                 {sosRequest?.can_speak && <TbChecks size={20} strokeWidth={2} className="text-lime-600" />}
                 {!sosRequest?.can_speak && <TbAlertTriangle size={20} strokeWidth={2} className="text-rose-600" />}
-                <p className="font-semibold">
-                    {sosRequest?.can_speak && 'The passenger can speak.'}
-                    {!sosRequest?.can_speak && 'The passenger cannot speak.'}
+                <p className="font-semibold pr-3">
+                    {sosRequest?.can_speak && 'Rider can speak'}
+                    {!sosRequest?.can_speak && 'Rider cannot speak'}
                 </p>
             </div>
-            <Button variant='default'>
-                <TbPhoneCall size={20} strokeWidth={2} className="mr-2" /> Call Passenger
-            </Button>
         </Box>
     )
 }

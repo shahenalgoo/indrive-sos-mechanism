@@ -18,7 +18,8 @@ import { useUser } from "@/context/SessionContext";
 import ChatMessages from "../../components/chat/ChatMessages";
 import ChatInput from "../../components/chat/ChatInput";
 import { useAgentSos } from "@/context/AgentSosContext";
-import RightSidebar from "../../components/sidebar-right/RightSidebar";
+import RightSidebar from "../../components/chat-sidebar/RightSidebar";
+import ChatHeader from "../../components/chat-header/ChatHeader";
 
 
 type PageProps = {
@@ -84,11 +85,15 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 
 	return (
 		<>
-			<div className="chat relative h-full flex-1">
-				<ChatMessages id={id} sosRequest={sosRequest} />
-				<ChatInput id={id} sosRequest={sosRequest} />
+			<ChatHeader sosRequest={sosRequest} />
+
+			<div className="flex h-full">
+				<div className="chat relative h-full flex-1">
+					<ChatMessages id={id} sosRequest={sosRequest} />
+					<ChatInput id={id} sosRequest={sosRequest} />
+				</div>
+				<RightSidebar sosRequest={sosRequest} />
 			</div>
-			<RightSidebar sosRequest={sosRequest} />
 		</>
 	)
 }

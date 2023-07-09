@@ -9,13 +9,13 @@ interface ClientInformedPoliceProps {
 
 const ClientInformedPolice: FC<ClientInformedPoliceProps> = ({ sosRequest }) => {
     return (
-        <Box space='sm' className={`flex justify-between items-center text-black ${sosRequest?.initiator_informed_police ? 'bg-lime-200' : 'bg-rose-200'}`}>
-            <div className="flex items-center gap-3">
+        <Box space='sm' className={`h-10 p-1 flex justify-between items-center text-xs text-black border-none ${sosRequest?.initiator_informed_police ? 'bg-lime-200' : 'bg-rose-200'}`}>
+            <div className="flex items-center gap-2 ml-1">
                 {!sosRequest?.initiator_informed_police && <TbAlertTriangle size={20} strokeWidth={2} className="text-rose-600" />}
                 {sosRequest?.initiator_informed_police && <TbChecks size={20} strokeWidth={2} className="text-lime-600" />}
-                <p className="font-semibold">
-                    {!sosRequest?.initiator_informed_police && 'The passenger has not informed the police.'}
-                    {sosRequest?.initiator_informed_police && 'The passenger has informed the police.'}
+                <p className="font-semibold pr-3">
+                    {!sosRequest?.initiator_informed_police && 'Rider did not call police'}
+                    {sosRequest?.initiator_informed_police && 'Rider called police'}
                 </p>
             </div>
         </Box>
