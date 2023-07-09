@@ -1,15 +1,24 @@
-'use client'
+'use client';
 
+// React
 import { FC } from "react";
 import { useParams } from 'next/navigation'
+import Link from "next/link";
 
+// Components
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Box from "@/components/ui/box";
-import Link from "next/link";
+
+// Hooks
 import { useAgentSos } from "@/context/AgentSosContext";
+
+
+
 
 const LeftSidebar: FC = () => {
 
+    // Hooks
+    //
     const { allRequests } = useAgentSos();
     const params = useParams();
 

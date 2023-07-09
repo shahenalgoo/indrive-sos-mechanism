@@ -46,6 +46,7 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
 
 
     // Ref
+    //
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
 
@@ -54,7 +55,8 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
     const { user } = useUser();
 
 
-    // No user 😵
+    // No user
+    //
     if (!user) {
         console.log('No user found');
         return
@@ -142,6 +144,7 @@ const ChatInput: FC<ChatInputProps> = ({ id, sosRequest }) => {
 
                 </DropdownMenuContent>
             </DropdownMenu>
+
 
             {/* Input */}
             <TextareaAutosize

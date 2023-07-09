@@ -1,5 +1,5 @@
 // Components
-import AgentLogin from "../components/AgentLogin";
+import AgentLogin from "./AgentLogin";
 
 
 export default function Home() {

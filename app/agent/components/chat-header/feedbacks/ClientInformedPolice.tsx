@@ -1,7 +1,17 @@
-import Box from "@/components/ui/box";
+// React
 import { FC } from "react";
+
+// Typing
 import { SosReq } from "@/types/typings";
+
+// Components
+import Box from "@/components/ui/box";
+
+// Icons
 import { TbAlertTriangle, TbChecks } from "react-icons/tb";
+
+
+
 
 interface ClientInformedPoliceProps {
     sosRequest: SosReq | null

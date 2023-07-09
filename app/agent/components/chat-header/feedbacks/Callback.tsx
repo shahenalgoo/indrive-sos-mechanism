@@ -1,8 +1,17 @@
-import Box from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
-import { SosReq } from "@/types/typings";
+// React
 import { FC } from "react";
-import { TbAlertTriangle, TbChecks, TbPhoneCall } from "react-icons/tb";
+
+// Typings
+import { SosReq } from "@/types/typings";
+
+// Components
+import Box from "@/components/ui/box";
+
+// Icons
+import { TbAlertTriangle, TbChecks } from "react-icons/tb";
+
+
+
 
 interface CallbackProps {
     sosRequest: SosReq | null

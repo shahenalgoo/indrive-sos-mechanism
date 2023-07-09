@@ -3,6 +3,10 @@
 // React
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
+// Components
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 //Appwrite
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
 import { Query } from "appwrite";
@@ -12,8 +16,8 @@ import { SosMessage, SosReq } from "@/types/typings";
 
 // Libs
 import { cn } from "@/lib/override-classes";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+
 
 
 /**
@@ -122,8 +126,6 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
         </div>
     )
 }
-
-
 
 
 
