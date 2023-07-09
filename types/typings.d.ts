@@ -33,7 +33,6 @@ export type SosMessage = Models.Document & {
 export type CourseSchema = {
     title: string;
     body: string;
-    jsx?: boolean;
 }
 
 export type QuizSchema = {

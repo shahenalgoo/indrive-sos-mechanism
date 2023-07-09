@@ -130,8 +130,6 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
 
             if (res.total > 0) {
                 setAllMessages(res.documents as SosMessage[]);
-                // console.log("all messages", res.documents);
-
             } else {
                 console.log("No Messages found");
             }
