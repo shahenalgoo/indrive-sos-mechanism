@@ -12,8 +12,8 @@ const BenefitsCard: FC = () => {
     return (
         <div className="px-6 my-auto flex-1 flex flex-col justify-center">
             <Item icon={<Tb24Hours size={26} strokeWidth={1} />} value="An inDrive Safety Agent will receive a detailed notification upon your request." />
-            <Item icon={<TbHeartHandshake size={26} strokeWidth={1} />} value="We will call you, or you have the option to chat if unable to speak.." />
-            <Item icon={<PiSirenThin size={26} strokeWidth={1} />} value="We will notify emergency services on your behalf if necessary. Alternative emergency options will also be available" />
+            <Item icon={<TbHeartHandshake size={26} strokeWidth={1} />} value="We will call you, or you have the option to chat if you are unable to speak." />
+            <Item icon={<PiSirenThin size={26} strokeWidth={1} />} value="We will notify emergency services on your behalf if necessary. Alternative emergency options will also be available." />
         </div>
     )
 }
