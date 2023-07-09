@@ -37,7 +37,7 @@ export const courseAndQuizData: CourseAndQuizSchema[] = [
         course: {
             title: "During the ride",
             body: `
-                <p>As soon as you are in the ride, tap the shield icon to access <strong>Precautions</strong></p>
+                <p>As soon as you are in the car, tap the shield icon to access <strong>Precautions</strong></p>
                 <p>You can choose to share your live location with trusted contacts, record audio and authenticate the ride.</p>
                 <p>Tap the SOS icon on the main screen to access our <strong>SOS & Emergency services</strong>.</p>
             `,
@@ -58,8 +58,8 @@ export const courseAndQuizData: CourseAndQuizSchema[] = [
 
             question: "Where can you access live location sharing, audio recording and ride authentication?",
             options: [
-                "SOS & Emergency (SOS Icon)",
-                "Precautions (Shield Icon)",
+                "SOS & Emergency (SOS icon)",
+                "Precautions (Shield icon)",
                 "Mood & Preferences",
                 "Profile Settings"
             ],
@@ -97,8 +97,8 @@ export const courseAndQuizData: CourseAndQuizSchema[] = [
 
             question: "How can you access the safety agent support and police assistance features?",
             options: [
-                "SOS & Emergency (SOS Icon)",
-                "Precautions (Shield Icon)",
+                "SOS & Emergency (SOS icon)",
+                "Precautions (Shield icon)",
                 "Mood & Preferences",
                 "Profile Settings"
             ],
