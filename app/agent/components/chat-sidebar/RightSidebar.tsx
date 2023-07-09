@@ -58,9 +58,9 @@ const RightSidebar: FC<RightSidebarProps> = ({ sosRequest }) => {
                     </PeopleDetails>
 
 
-                    {/* Passenger Info */}
+                    {/* Rider Info */}
                     <PeopleDetails
-                        title="Passenger Information"
+                        title="Rider Information"
                         name={sosRequest?.initiator_name || 'Fetching...'}
                         avatarUrl="https://api.multiavatar.com/dd.png"
                     >
