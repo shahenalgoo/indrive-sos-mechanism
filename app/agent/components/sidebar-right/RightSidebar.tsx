@@ -6,6 +6,7 @@ import { FC, useEffect } from "react";
 import PeopleDetails from "./PeopleDetails";
 import { DescriptionList, DT, DD } from "@/components/ui/description-list";
 import { SosReq } from "@/types/typings";
+import LiveLocation from "./LiveLocation";
 
 interface RightSidebarProps {
     sosRequest: SosReq | null
@@ -18,6 +19,7 @@ const RightSidebar: FC<RightSidebarProps> = ({ sosRequest }) => {
         <aside className="left-sidebar shrink-0 w-[22rem] h-full border-l border-border">
             <ScrollArea className="h-full w-full">
                 <div className="flex flex-col gap-6 p-2 py-6">
+
 
                     {/* Driver Info */}
                     <PeopleDetails
@@ -71,6 +73,10 @@ const RightSidebar: FC<RightSidebarProps> = ({ sosRequest }) => {
                             </div>
                         </DescriptionList>
                     </PeopleDetails>
+
+
+                    {/* Live Location */}
+                    <LiveLocation />
 
                 </div>
             </ScrollArea>

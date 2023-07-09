@@ -3,6 +3,8 @@ import '../globals.scss';
 import ClientProviders from '@/components/ClientProviders';
 import SosModal from './components/sos/SosModal';
 import Toaster from '@/components/misc/Toaster';
+import PrecautionsModal from './components/precautions/PrecautionModal';
+import RideDetailsModal from './components/ride-details/RideDetailsModal';
 
 export const metadata = {
 	title: 'InDrive SOS'
@@ -21,6 +23,8 @@ export default function RootLayout({
 
 						{children}
 						<SosModal />
+						<PrecautionsModal />
+						<RideDetailsModal />
 						<Toaster />
 
 					</div>

@@ -6,10 +6,10 @@ import { FC, useEffect, useState } from "react";
 // Typings
 import { CourseAndQuizSchema } from "@/types/typings";
 import { Button, buttonVariants } from "../ui/button";
-import Link from "next/link";
 import QuizMcq from "./QuizMcq";
 import NextButton from "./NextButton";
 import { useUser } from "@/context/SessionContext";
+import Link from "next/link";
 
 interface CourseAndQuizManagerProps {
     courseAndQuizData: CourseAndQuizSchema[]
@@ -102,14 +102,14 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
             <>
                 {currentSection && currentSection.course &&
                     <>
-                        <h1 className="mb-10 scroll-m-20 text-center text-lg sm:text-2xl tracking-tight">
+                        <h1 className="scroll-m-20 text-center text-lg sm:text-2xl tracking-tight">
                             {currentSection.course.title}
                         </h1>
 
                         {currentSection.course.jsx ?
                             <div className="parsed-body" dangerouslySetInnerHTML={{ __html: currentSection.course.body }}></div>
                             :
-                            <p className="mb-10 scroll-m-20 text-center text-sm tracking-tight">
+                            <p className="text-center text-sm">
                                 {currentSection.course.body}
                             </p>
                         }
@@ -121,11 +121,11 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
                 {currentSection && currentSection.quiz &&
                     <>
-                        <h1 className="mb-10 scroll-m-20 text-center text-lg sm:text-2xl tracking-tight">
+                        <h1 className="scroll-m-20 text-center text-lg sm:text-2xl tracking-tight">
                             {currentSection.quiz.question}
                         </h1>
 
-                        < QuizMcq
+                        <QuizMcq
                             questionData={currentSection.quiz}
                             setScore={setScore}
                             onNextQuestion={onNextSection}
@@ -161,9 +161,9 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
                         Restart
                     </Button>
 
-                    {/* <Link href='/' className={buttonVariants({ variant: "secondary" })}>
-                        Quit Game
-                    </Link> */}
+                    <Link href='/ride' className={buttonVariants({ variant: "accent" })}>
+                        Quit
+                    </Link>
                 </div>
             </div>
         )
@@ -171,10 +171,8 @@ const CourseAndQuizManager: FC<CourseAndQuizManagerProps> = ({ courseAndQuizData
 
     return (
         <>
-            <div className="min-h-[calc(100vh_-_250px)] flex flex-col justify-center">
-                <div className="container md:max-w-[735px]">
-                    {quizEnded ? endScreen() : courseAndQuiz()}
-                </div>
+            <div className="px-4 h-full flex flex-col justify-center gap-8">
+                {quizEnded ? endScreen() : courseAndQuiz()}
             </div>
         </>
     );

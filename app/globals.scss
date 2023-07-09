@@ -87,3 +87,34 @@
 		-webkit-tap-highlight-color: transparent;
 	}
 }
+
+
+
+.parsed-body {
+
+	p {
+		margin-bottom: 24px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+/*//////////////////////////////////////////////////////////////
+    QUIZ RADIO
+//////////////////////////////////////////////////////////////*/
+.radio {
+
+	// checked bg
+	input:checked~.checkmark {
+		background-color: theme('colors.secondary.DEFAULT');
+		border-color: theme('colors.secondary.DEFAULT');
+		opacity: 1;
+	}
+
+	input:checked~.checkmark .checkmark-icon {
+		display: block;
+	}
+}

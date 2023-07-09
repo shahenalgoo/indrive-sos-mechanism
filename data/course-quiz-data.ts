@@ -11,11 +11,19 @@ export const courseAndQuizData: CourseAndQuizSchema[] = [
     {
         course: {
             title: "Before the ride",
-            body: "<p>Check the license plate, car model, and driver photo before starting a trip.<br><br>"
-                + "Cancel the ride if the info doesn't match.<br><br>"
-                + "</p>",
+            body: `
+                <p>Check the license plate, car model, and driver photo before starting a trip.</p>
+                <p>Cancel the ride if the info doesn't match.</p>
+            `,
             jsx: true
         }
+        // course: {
+        //     title: "Before the ride",
+        //     body: "<p>Check the license plate, car model, and driver photo before starting a trip.<br><br>"
+        //         + "Cancel the ride if the info doesn't match.<br><br>"
+        //         + "</p>",
+        //     jsx: true
+        // }
     },
     {
         quiz: {
@@ -33,9 +41,11 @@ export const courseAndQuizData: CourseAndQuizSchema[] = [
     {
         course: {
             title: "During the ride",
-            body: "<p>" +
-                "As soon as you are in the ride, tap the triangle icon to access <strong>Precautions</strong>.<br><br>You can choose to share your live location with trusted contacts, record audio and authenticate the ride.<br><br>" +
-                "Tap the shield icon on the main screen to access our <strong>SOS & Emergency services</strong>.</p>",
+            body: `
+                <p>As soon as you are in the ride, tap the triangle icon to access <strong>Precautions</strong></p>
+                <p>You can choose to share your live location with trusted contacts, record audio and authenticate the ride.</p>
+                <p>Tap the shield icon on the main screen to access our <strong>SOS & Emergency services</strong>.</p>
+            `,
             jsx: true
         }
     },

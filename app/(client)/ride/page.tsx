@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 // Components
 
@@ -7,6 +9,7 @@ import { TbChevronUp, TbCircleCheckFilled, TbLoader, TbLoader2, TbMessage, TbPho
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from '@/components/ui/button';
 import Logout from '../components/Logout';
+import { setGlobalState } from '@/lib/global-states';
 
 
 
@@ -26,14 +29,20 @@ export default function Home() {
 					<RideTriggers />
 				</div>
 
-				<div className='flex items-center justify-center gap-4 px-4 py-3 bg-white border-t-2 border-border'>
-					<div className='text-center'>
+				<div className='flex items-center justify-between gap-4 px-4 py-3 bg-white border-t-2 border-border'>
+					<div className=''>
 						<h4 className='text-sm font-semibold mb-1 ml-1'>
 							Ford Fiesta
 						</h4>
 						<span className='inline-block border border-neutral-300 rounded-lg px-4 font-bold bg-white'>
 							FRD 3568
 						</span>
+					</div>
+
+					<div>
+						<Button onClick={() => setGlobalState('rideDetailsModal', true)} size='sm'>
+							Ride Details
+						</Button>
 					</div>
 				</div>
 
