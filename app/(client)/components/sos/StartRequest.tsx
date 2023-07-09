@@ -51,9 +51,7 @@ const StartRequest: FC = () => {
                 initiator_phone: user?.phone,
                 can_speak: true,
                 req_acknowledged: false,
-                agent_informed_police: false,
                 initiator_informed_police: false,
-                initiator_informed_contacts: false
             } as SosReq);
 
             console.log("Req created successfully,", res);
