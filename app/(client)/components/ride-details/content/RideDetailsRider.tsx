@@ -2,7 +2,7 @@ import Box from "@/components/ui/box";
 import { useUser } from "@/context/SessionContext";
 import { FC } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { TbLoader2 } from "react-icons/tb";
+import { TbCurrentLocation, TbLoader2 } from "react-icons/tb";
 import { Mood } from "@/types/enums";
 import { DD, DT, DescriptionList } from "@/components/ui/description-list";
 
@@ -20,9 +20,12 @@ const RideDetailsRider: FC = () => {
                     </AvatarFallback>
                 </Avatar>
 
-                <div className="text-sm leading-2">
-                    <h4 className="font-bold">{user?.name || 'Fetching...'} - (Rider)</h4>
-                    <span className="text-xs font-medium">Mood: {prefs.moodprefs.mood === Mood.neutral && Mood.neutral}</span>
+                <div className="text-sm leading-6">
+                    <h4 className="font-bold">{user?.name || 'Fetching...'}</h4>
+                    <p className="mb-1 text-xs font-medium">Mood: {prefs.moodprefs.mood === Mood.neutral && Mood.neutral}</p>
+                    <p className="flex items-center text-xs font-medium text-blue-700">
+                        <TbCurrentLocation className="animate-pulse mr-1" /> Is sharing live location
+                    </p>
                 </div>
             </div>
 
