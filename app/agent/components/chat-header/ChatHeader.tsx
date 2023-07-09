@@ -18,8 +18,8 @@ const ChatHeader: FC<ChatHeaderProps> = ({ sosRequest }) => {
     const { updateSos } = useAgentSos();
     const router = useRouter();
 
-    const handleChangeReqStatus = () => {
-        updateSos(sosRequest, { is_active: false } as SosReq);
+    const handleChangeReqStatus = async () => {
+        await updateSos(sosRequest, { is_active: false } as SosReq);
         router.push('/agent/sos');
     }
 

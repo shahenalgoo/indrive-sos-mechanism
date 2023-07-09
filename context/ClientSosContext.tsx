@@ -1,6 +1,5 @@
 /**
- * A context to handle sos requests
- * Also contains the useUser hook to access user data and states
+ * A context to handle client sos request
  * 
  */
 
@@ -8,12 +7,17 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from "react";
 
 // Appwrite
-import { AppwriteIds, account, client, databases } from "@/lib/appwrite-config";
-import { ID, Models, Query } from "appwrite";
-import toast from "react-hot-toast";
+import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
+import { ID, Query } from "appwrite";
+
+// Hooks
 import { useUser } from "./SessionContext";
-import { SosMessage, SosReq } from "@/types/typings";
+
+//Lib
 import { setGlobalState } from "@/lib/global-states";
+
+// Typings & Enums
+import { SosMessage, SosReq } from "@/types/typings";
 import { Role } from "@/types/enums";
 
 
@@ -65,9 +69,13 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
     const [allMessages, setAllMessages] = useState<SosMessage[] | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+
+    // Hooks
+    //
     const { isLoggedIn, user } = useUser();
 
-    // Fetch User & set login status
+
+    // Fetch user's sos req
     //
     const fetchSosReq = useCallback(async () => {
         if (!user) {
@@ -88,22 +96,14 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
 
             if (res.total > 0) {
                 setSosReq(res.documents[0] as SosReq);
-
-                console.log(res.documents[0]);
-
-
                 setGlobalState('sosInitiated', true)
-
             } else {
-                console.log("No Sos Req found");
                 setGlobalState('sosInitiated', false)
                 setSosReq(null);
             }
 
         } catch (error) {
-
             console.log(error);
-
         } finally {
             setIsLoading(false);
         }
@@ -143,7 +143,7 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
     }, [sosReq, isLoggedIn]);
 
 
-    // Agent sends message to client
+    // Client sends message
     //
     const sendMessage = async (userId: string, message: string) => {
         if (!sosReq) {
@@ -165,7 +165,7 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
     }
 
 
-    // UPDATE SOS
+    // Update SOS
     //
     const updateSos = async (sosRequest: SosReq | null, data: any) => {
         if (!sosRequest) {
@@ -181,8 +181,7 @@ export const ClientSosProvider: React.FC<ClientSosProviderProps> = ({ children }
     }
 
 
-
-    // UEF - SOS req messages
+    // UEF - Fetch sos messages and subscribe to changes
     useEffect(() => {
         fetchMessages();
 

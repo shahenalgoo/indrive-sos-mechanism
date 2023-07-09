@@ -1,6 +1,5 @@
 /**
  * A context to handle user sessions from appwrite
- * Also contains the useUser hook to access user data and states
  * 
  */
 
@@ -10,10 +9,14 @@ import React, { createContext, useState, useEffect, useContext, useCallback } fr
 // Appwrite
 import { account } from "@/lib/appwrite-config";
 import { Models } from "appwrite";
+
+// Lib
 import toast from "react-hot-toast";
-import { MoodsPrefsType, UserPref } from "@/types/typings";
-import { Mood } from "@/types/enums";
 import { useRouter } from 'next/navigation';
+
+// Typings
+import { UserPref } from "@/types/typings";
+import { Mood } from "@/types/enums";
 
 
 
@@ -87,7 +90,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     const router = useRouter();
 
 
-    // Fetch User & set login status
+    // Fetch user & set login status
     //
     const fetchUser = useCallback(async () => {
 
@@ -119,7 +122,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }: an
     }, []);
 
 
-    // Login using Appwrite for CLIENT
+    // Login using Appwrite
     //
     const login = async (email: string, password: string) => {
         setIsLoading(true);

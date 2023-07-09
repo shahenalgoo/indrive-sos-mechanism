@@ -1,13 +1,18 @@
 'use client';
 
-import { ScrollArea } from "@/components/ui/scroll-area";
+// React
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 
+//Appwrite
 import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
-import { SosMessage, SosReq } from "@/types/typings";
-import { cn } from "@/lib/override-classes";
 import { Query } from "appwrite";
 
+// Typings
+import { SosMessage, SosReq } from "@/types/typings";
+
+// Libs
+import { cn } from "@/lib/override-classes";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
@@ -43,9 +48,6 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
 
             if (res.total > 0) {
                 setSosMessages(res.documents as SosMessage[]);
-                // console.log("all messages", res.documents);
-            } else {
-                console.log("No Messages found");
             }
 
         } catch (error) {
@@ -56,6 +58,7 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
     }, []);
 
 
+    // UEF - Fetch messages on init and subscribe to changes
     useEffect(() => {
         fetchMessages();
 
@@ -69,41 +72,6 @@ const AllMessages: FC<AllMessagesProps> = ({ id }) => {
             subscribe();
         }
     }, [fetchMessages]);
-
-
-
-    // TODAY
-    // const timeNow = new Date();
-    // // const timeNow = Date.now();
-
-    // // DATE & TIME
-    // const dateOptions = { month: 'short', day: 'numeric' };
-    // const timeOptions = { hour: '2-digit', minute: '2-digit' };
-
-    // // ENTRY DEADLINE
-    // const parsedDeadline = new Date(data.entryDeadline);
-    // const deadlineDate = parsedDeadline.toLocaleDateString('en-US', dateOptions);
-    // const deadlineTime = parsedDeadline.toLocaleTimeString('en-US', timeOptions);
-
-    // // STARTING
-    // const parsedStarting = new Date(data.startingDate);
-    // const startingDate = parsedStarting.toLocaleDateString('en-US', dateOptions);
-    // const startingTime = parsedStarting.toLocaleTimeString('en-US', timeOptions);
-
-    // // ENDING
-    // const parsedEnding = new Date(data.endingDate);
-    // const endingDate = parsedEnding.toLocaleDateString('en-US', dateOptions);
-    // const endingTime = parsedEnding.toLocaleTimeString('en-US', timeOptions);
-
-
-
-    const getTime = (dateString: string) => {
-        console.log(new Date(dateString));
-
-        // return new Date(dateString);
-        return ""
-    }
-
 
 
     // Auto Scroll to bottom

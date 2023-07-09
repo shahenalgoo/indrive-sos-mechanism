@@ -13,15 +13,24 @@ interface QuizMcqProps {
     onNextQuestion: () => void;
 }
 
+/**
+ * Component for Multiple choice questions
+ * 
+ */
+
 const QuizMcq: FC<QuizMcqProps> = ({ questionData, setScore, onNextQuestion }) => {
 
+    // States
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
 
 
+    // Option selector
     const onOptionChange = (index: number) => {
         setSelectedOption(index);
     };
 
+
+    // Check correct answer before proceeding
     const checkWin = () => {
         if (selectedOption === null) {
             toast.error("Please choose an option");
@@ -34,6 +43,7 @@ const QuizMcq: FC<QuizMcqProps> = ({ questionData, setScore, onNextQuestion }) =
 
         onNextQuestion();
     };
+
 
     useEffect(() => {
 
