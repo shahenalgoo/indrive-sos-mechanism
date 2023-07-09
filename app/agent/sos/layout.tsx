@@ -3,9 +3,13 @@ import '../../globals.scss';
 // Components
 import AgentProviders from '@/components/AgentProviders';
 import CheckUser from '../components/CheckUser';
-import NavbarAgent from '../components/Navbar';
 import LeftSidebar from '../components/LeftSidebar';
 
+
+
+
+// Metadata
+//
 export const metadata = {
 	title: 'InDrive Team'
 }
@@ -19,12 +23,12 @@ export default function RootLayout({
 		<html lang="en">
 			<AgentProviders>
 				<CheckUser>
-					<body className='h-[calc(100vh_-_120px)] overflow-hidden'>
-						<NavbarAgent />
+					<body className='h-[calc(100vh_-_56px)] overflow-hidden'>
+						<main className='h-full flex'>
 
-						<main className='mt-14 h-full flex'>
 							<LeftSidebar />
 							{children}
+
 						</main>
 					</body>
 				</CheckUser>

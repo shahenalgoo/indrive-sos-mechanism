@@ -1,10 +1,17 @@
 'use client';
 
+// React
 import { FC } from "react";
 import { redirect } from "next/navigation";
 
+// Hooks
 import { useUser } from "@/context/SessionContext";
+
+// Appwrite
 import { account } from "@/lib/appwrite-config";
+
+
+
 
 interface CheckUserProps {
     children: React.ReactNode;
@@ -18,12 +25,14 @@ const CheckUser: FC<CheckUserProps> = ({ children }) => {
 
 
     // If user is not logged in
+    //
     if (!isLoading && !isLoggedIn) {
         redirect('/agent/');
     }
 
 
     // If user is not an agent
+    //
     if (!isLoading && isLoggedIn) {
         if (user?.email !== 'agent1@indrive.com') {
             account.deleteSession('current');

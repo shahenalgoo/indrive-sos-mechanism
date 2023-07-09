@@ -1,4 +1,5 @@
-import { CourseAndQuizSchema } from "@/types/typings"
+// Typings
+import { CourseAndQuizSchema } from "@/types/typings";
 
 
 export const courseAndQuizData: CourseAndQuizSchema[] = [

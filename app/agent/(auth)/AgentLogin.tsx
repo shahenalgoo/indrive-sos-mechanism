@@ -1,15 +1,18 @@
 'use client';
 
 // React
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useRouter } from 'next/navigation';
 
+// Components
 import InputField from "@/components/form/InputField";
 import Box from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
 
+// Appwrite
 import { account } from "@/lib/appwrite-config";
-import { useUser } from "@/context/SessionContext";
+
+
 
 
 const AgentLogin: FC = () => {
@@ -23,7 +26,6 @@ const AgentLogin: FC = () => {
     // Hooks
     //
     const router = useRouter();
-    const { user, isLoggedIn, isLoading } = useUser();
 
 
     // On Submit
@@ -32,7 +34,6 @@ const AgentLogin: FC = () => {
         e.preventDefault();
 
         try {
-            // await account.deleteSession('current');
             await account.createEmailSession(email, password);
             router.push("/agent/sos");
         } catch (error) {
@@ -63,6 +64,7 @@ const AgentLogin: FC = () => {
                 <Button variant='accent'>
                     Sign In
                 </Button>
+
             </form>
         </Box>
     )

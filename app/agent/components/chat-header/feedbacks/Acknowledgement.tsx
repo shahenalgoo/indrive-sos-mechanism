@@ -1,10 +1,21 @@
+// React
+import { FC } from "react";
+
+// Typings
+import { SosReq } from "@/types/typings";
+
+// Components
 import Box from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
+
+// Hooks
 import { useAgentSos } from "@/context/AgentSosContext";
-import { useClientSos } from "@/context/ClientSosContext";
-import { SosReq } from "@/types/typings";
-import { FC } from "react";
-import { TbChecks, TbLoader2, TbUserShield } from "react-icons/tb";
+
+// Icons
+import { TbChecks, TbLoader2, } from "react-icons/tb";
+
+
+
 
 interface AcknowledgementProps {
     sosRequest: SosReq | null
@@ -21,6 +32,7 @@ const Acknowledgement: FC<AcknowledgementProps> = ({ sosRequest }) => {
     const handleAcknowledge = () => {
         updateSos(sosRequest, { req_acknowledged: true } as SosReq);
     }
+
 
     return (
         <Box space='sm' className={`h-10 p-1 flex justify-between items-center text-xs text-black border-none ${sosRequest?.req_acknowledged ? 'bg-lime-200' : 'bg-orange-300'}`}>

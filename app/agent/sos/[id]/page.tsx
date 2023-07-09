@@ -1,25 +1,21 @@
 'use client';
 
 // React
-import { useCallback, useEffect, useRef, useState } from "react";
-import { notFound } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
-import { Role } from "@/types/enums";
-import { SosMessage, SosReq } from "@/types/typings";
+// Typings
+import { SosReq } from "@/types/typings";
 
 // Appwrite
-import { AppwriteIds, client, databases, functions } from "@/lib/appwrite-config";
-import { ID, Query } from "appwrite";
-
-// Hooks
-import { useUser } from "@/context/SessionContext";
+import { AppwriteIds, client, databases } from "@/lib/appwrite-config";
 
 // Components
 import ChatMessages from "../../components/chat/ChatMessages";
 import ChatInput from "../../components/chat/ChatInput";
-import { useAgentSos } from "@/context/AgentSosContext";
 import RightSidebar from "../../components/chat-sidebar/RightSidebar";
 import ChatHeader from "../../components/chat-header/ChatHeader";
+
+
 
 
 type PageProps = {
@@ -28,18 +24,12 @@ type PageProps = {
 	}
 }
 
-
 const SosHandlingPage = ({ params: { id } }: PageProps) => {
 
 	// States
 	//
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [sosRequest, setSosRequest] = useState<SosReq | null>(null);
-
-
-	const [newMessage, setNewMessage] = useState<string>('');
-	const { user } = useUser();
-
 
 
 	// FETCH SINGLE SOS REQUEST
@@ -55,19 +45,6 @@ const SosHandlingPage = ({ params: { id } }: PageProps) => {
 			setIsLoading(false);
 		}
 	}, []);
-
-	const { updateSos } = useAgentSos();
-
-
-	// Agent informs police
-	const handleInformPolice = () => {
-		updateSos(sosRequest, { agent_informed_police: true } as SosReq);
-	}
-
-	// Agent closes SOS req
-	const handleChangeReqStatus = (value: boolean) => {
-		updateSos(sosRequest, { is_active: value } as SosReq);
-	}
 
 
 	useEffect(() => {

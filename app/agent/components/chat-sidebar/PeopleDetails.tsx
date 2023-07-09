@@ -1,9 +1,14 @@
-import Box from "@/components/ui/box";
+// React
 import { FC } from "react";
 
+// Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import Box from "@/components/ui/box";
+
+// Icon
 import { TbLoader2 } from "react-icons/tb";
+
+
 
 
 interface PeopleDetailsProps {
@@ -25,12 +30,7 @@ const PeopleDetails: FC<PeopleDetailsProps> = ({ children, title, name, avatarUr
                             <TbLoader2 className='animate-spin opacity-30' />
                         </AvatarFallback>
                     </Avatar>
-                    <div>
-                        <h4 className="mb-1 text-sm font-bold">{name}</h4>
-                        {/* <Button size='sm' variant='outline'>
-                            View Profile
-                        </Button> */}
-                    </div>
+                    <h4 className="mb-1 text-sm font-bold">{name}</h4>
                 </div>
                 {children}
             </Box>

@@ -1,13 +1,25 @@
 'use client';
 
-import { SosReq } from "@/types/typings";
+// React
 import { FC } from "react";
+import { useRouter } from "next/navigation";
+
+// Typings
+import { SosReq } from "@/types/typings";
+
+// Components
+import { Button } from "@/components/ui/button";
+
+// Hooks
+import { useAgentSos } from "@/context/AgentSosContext";
+
+// Feedbacks
 import Acknowledgement from "./feedbacks/Acknowledgement";
 import Callback from "./feedbacks/Callback";
 import ClientInformedPolice from "./feedbacks/ClientInformedPolice";
-import { Button } from "@/components/ui/button";
-import { useAgentSos } from "@/context/AgentSosContext";
-import { useRouter } from "next/navigation";
+
+
+
 
 interface ChatHeaderProps {
     sosRequest: SosReq | null;
@@ -15,9 +27,12 @@ interface ChatHeaderProps {
 
 const ChatHeader: FC<ChatHeaderProps> = ({ sosRequest }) => {
 
+    // Hooks
+    //
     const { updateSos } = useAgentSos();
     const router = useRouter();
 
+    // Change request status
     const handleChangeReqStatus = async () => {
         await updateSos(sosRequest, { is_active: false } as SosReq);
         router.push('/agent/sos');

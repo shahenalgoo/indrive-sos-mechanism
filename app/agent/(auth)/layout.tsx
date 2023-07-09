@@ -1,6 +1,13 @@
-import Providers from '@/components/ClientProviders';
 import '../../globals.scss';
 
+// Providers
+import Providers from '@/components/ClientProviders';
+
+
+
+
+// Metadata
+//
 export const metadata = {
 	title: 'InDrive Agent'
 }

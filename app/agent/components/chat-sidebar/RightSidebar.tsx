@@ -1,19 +1,27 @@
 'use client';
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAgentSos } from "@/context/AgentSosContext";
-import { FC, useEffect } from "react";
-import PeopleDetails from "./PeopleDetails";
-import { DescriptionList, DT, DD } from "@/components/ui/description-list";
+// React
+import { FC } from "react";
+
+// Typings
 import { SosReq } from "@/types/typings";
+
+// Components
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { DescriptionList, DT, DD } from "@/components/ui/description-list";
+
+// Sidebar
+import PeopleDetails from "./PeopleDetails";
 import LiveLocation from "./LiveLocation";
+
+
+
 
 interface RightSidebarProps {
     sosRequest: SosReq | null
 }
 
 const RightSidebar: FC<RightSidebarProps> = ({ sosRequest }) => {
-
 
     return (
         <aside className="left-sidebar shrink-0 w-[22rem] h-full border-l border-border">

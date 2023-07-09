@@ -1,14 +1,15 @@
-import Box from "@/components/ui/box";
-import Image from "next/image";
+// React
 import { FC } from "react";
+import Image from "next/image";
 
+// Components
+import Box from "@/components/ui/box";
 import { DescriptionList, DT, DD } from "@/components/ui/description-list";
 
-interface LiveLocationProps {
 
-}
 
-const LiveLocation: FC<LiveLocationProps> = () => {
+
+const LiveLocation: FC = () => {
     return (
         <div>
             <h3 className="mb-2 text-xs font-semibold text-neutral-400">Live Location</h3>
